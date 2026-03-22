@@ -155,7 +155,6 @@ function TutorsBrowser() {
             <label className="text-xs font-semibold text-muted-foreground uppercase tracking-wide block mb-2">
               Category
             </label>
-            {/* ✅ "all" sentinel — empty string নয় */}
             <Select
               value={filters.category || "all"}
               onValueChange={(v) => setFilter("category", resolveVal(v))}
@@ -178,7 +177,6 @@ function TutorsBrowser() {
             <label className="text-xs font-semibold text-muted-foreground uppercase tracking-wide block mb-2">
               Minimum Rating
             </label>
-            {/* ✅ "all" sentinel — empty string নয় */}
             <Select
               value={filters.minRating || "all"}
               onValueChange={(v) => setFilter("minRating", resolveVal(v))}
