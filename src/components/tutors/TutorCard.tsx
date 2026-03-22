@@ -15,12 +15,12 @@ import { cn } from "@/lib/utils";
 const CATEGORY_COVERS: Record<string, string> = {
   Mathematics: "https://images.unsplash.com/photo-1509228468518-180dd4864904?w=600&h=200&fit=crop",
   Programming: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=600&h=200&fit=crop",
-  Languages:   "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=600&h=200&fit=crop",
-  Science:     "https://images.unsplash.com/photo-1532094349884-543559ce09f9?w=600&h=200&fit=crop",
-  Music:       "https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=600&h=200&fit=crop",
-  Design:      "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=600&h=200&fit=crop",
-  Business:    "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=200&fit=crop",
-  History:     "https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?w=600&h=200&fit=crop",
+  Languages: "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=600&h=200&fit=crop",
+  Science: "https://images.unsplash.com/photo-1532094349884-543559ce09f9?w=600&h=200&fit=crop",
+  Music: "https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=600&h=200&fit=crop",
+  Design: "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=600&h=200&fit=crop",
+  Business: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=200&fit=crop",
+  History: "https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?w=600&h=200&fit=crop",
 };
 
 const DEFAULT_COVER =
@@ -29,12 +29,12 @@ const DEFAULT_COVER =
 // ─── Avatar colour pool (deterministic from name) ─────────────────────────────
 const AVATAR_PALETTE = [
   { bg: "bg-violet-100 dark:bg-violet-900/60", text: "text-violet-800 dark:text-violet-200" },
-  { bg: "bg-sky-100 dark:bg-sky-900/60",       text: "text-sky-800 dark:text-sky-200" },
-  { bg: "bg-teal-100 dark:bg-teal-900/60",     text: "text-teal-800 dark:text-teal-200" },
-  { bg: "bg-pink-100 dark:bg-pink-900/60",     text: "text-pink-800 dark:text-pink-200" },
-  { bg: "bg-amber-100 dark:bg-amber-900/60",   text: "text-amber-800 dark:text-amber-200" },
-  { bg: "bg-rose-100 dark:bg-rose-900/60",     text: "text-rose-800 dark:text-rose-200" },
-  { bg: "bg-cyan-100 dark:bg-cyan-900/60",     text: "text-cyan-800 dark:text-cyan-200" },
+  { bg: "bg-sky-100 dark:bg-sky-900/60", text: "text-sky-800 dark:text-sky-200" },
+  { bg: "bg-teal-100 dark:bg-teal-900/60", text: "text-teal-800 dark:text-teal-200" },
+  { bg: "bg-pink-100 dark:bg-pink-900/60", text: "text-pink-800 dark:text-pink-200" },
+  { bg: "bg-amber-100 dark:bg-amber-900/60", text: "text-amber-800 dark:text-amber-200" },
+  { bg: "bg-rose-100 dark:bg-rose-900/60", text: "text-rose-800 dark:text-rose-200" },
+  { bg: "bg-cyan-100 dark:bg-cyan-900/60", text: "text-cyan-800 dark:text-cyan-200" },
 ];
 
 function getInitials(name: string): string {
@@ -69,7 +69,7 @@ function TutorAvatar({
   const sizeClass = `w-[${size}px] h-[${size}px]`;
 
   // Decide what to show
-  const showPrimary  = !!primarySrc && !failedPrimary;
+  const showPrimary = !!primarySrc && !failedPrimary;
   const showFallback = !showPrimary && !failedFallback;
   const showInitials = !showPrimary && !showFallback;
 
