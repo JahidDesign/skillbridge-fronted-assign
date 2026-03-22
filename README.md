@@ -1,174 +1,219 @@
-# SkillBridge — Backend API
+# SkillBridge — Frontend
 
-Node.js + Express + Prisma + PostgreSQL REST API for the SkillBridge tutoring platform.
+Next.js 14 + TypeScript + Tailwind CSS + shadcn/ui
 
 ---
 
 ## Quick Start
 
-### 1. Install dependencies
+### Step 1 — Dependencies install করো
 ```bash
+cd skillbridge/frontend
 npm install
 ```
 
-### 2. Set up environment
-```bash
-cp .env.example .env
-```
-
-Edit `.env`:
+### Step 2 — Environment file তৈরি করো
+`frontend` folder এ `.env.local` নামে নতুন file তৈরি করো:
 ```env
-DATABASE_URL="postgresql://USER:PASSWORD@HOST:5432/skillbridge"
-JWT_SECRET="any-long-random-secret-string"
-JWT_EXPIRES_IN="7d"
-PORT=5000
-FRONTEND_URL="http://localhost:3000"
-NODE_ENV="development"
+NEXT_PUBLIC_API_URL=http://localhost:5000/api
 ```
 
-### 3. Push schema to database
-```bash
-npx prisma db push
-```
-
-### 4. Seed demo data
-```bash
-npm run db:seed
-```
-
-### 5. Start dev server
+### Step 3 — Development server চালু করো
 ```bash
 npm run dev
 ```
 
-API runs at: **http://localhost:5000**
+Frontend চলবে: **http://localhost:3000**
 
 ---
 
-## Demo Accounts
+## Important — Backend আগে চালু করতে হবে
 
-| Role    | Email                   | Password   |
-|---------|-------------------------|------------|
-| Admin   | jhadam904@gmail.com     | admin123   |
-| Tutor   | sarah@skillbridge.com   | tutor123   |
-| Student | alex@example.com        | student123 |
+Frontend কাজ করার জন্য Backend অবশ্যই চলতে হবে।
+
+```bash
+# Terminal 1 — Backend
+cd skillbridge/backend
+npm run dev
+
+# Terminal 2 — Frontend
+cd skillbridge/frontend
+npm run dev
+```
 
 ---
 
 ## Project Structure
 
 ```
-backend/
-├── prisma/
-│   └── schema.prisma        # Database schema (7 models)
+frontend/
 ├── src/
-│   ├── index.js             # Express app entry point
+│   ├── app/                        # Next.js App Router pages
+│   │   ├── page.tsx                # Home page (/)
+│   │   ├── login/page.tsx          # Login (/login)
+│   │   ├── register/page.tsx       # Register (/register)
+│   │   ├── tutors/
+│   │   │   ├── page.tsx            # Browse Tutors (/tutors)
+│   │   │   └── [id]/page.tsx       # Tutor Profile (/tutors/:id)
+│   │   ├── dashboard/
+│   │   │   ├── layout.tsx          # Student dashboard layout
+│   │   │   ├── page.tsx            # Student Overview (/dashboard)
+│   │   │   ├── bookings/page.tsx   # My Bookings (/dashboard/bookings)
+│   │   │   └── profile/page.tsx    # Student Profile (/dashboard/profile)
+│   │   ├── tutor/
+│   │   │   ├── layout.tsx          # Tutor dashboard layout
+│   │   │   ├── dashboard/page.tsx  # Tutor Overview (/tutor/dashboard)
+│   │   │   ├── profile/page.tsx    # Tutor Profile (/tutor/profile)
+│   │   │   └── availability/page.tsx # Set Availability (/tutor/availability)
+│   │   └── admin/
+│   │       ├── layout.tsx          # Admin layout
+│   │       ├── page.tsx            # Admin Overview (/admin)
+│   │       ├── users/page.tsx      # Manage Users (/admin/users)
+│   │       ├── bookings/page.tsx   # All Bookings (/admin/bookings)
+│   │       └── categories/page.tsx # Categories (/admin/categories)
+│   ├── components/
+│   │   ├── layout/
+│   │   │   ├── Navbar.tsx          # Navigation bar
+│   │   │   └── Footer.tsx          # Footer
+│   │   ├── tutors/
+│   │   │   └── TutorCard.tsx       # Tutor card component
+│   │   └── ui/                     # shadcn/ui components
+│   │       ├── button.tsx
+│   │       ├── card.tsx
+│   │       ├── input.tsx
+│   │       ├── label.tsx
+│   │       ├── badge.tsx
+│   │       ├── select.tsx
+│   │       ├── textarea.tsx
+│   │       └── toaster.tsx
+│   ├── context/
+│   │   └── AuthContext.tsx         # Auth state management
 │   ├── lib/
-│   │   ├── prisma.js        # Prisma client singleton
-│   │   └── seed.js          # Database seeder
-│   ├── middleware/
-│   │   └── auth.js          # JWT auth + role guard
-│   └── routes/
-│       ├── auth.js          # /api/auth/*
-│       ├── tutors.js        # /api/tutors/*
-│       ├── bookings.js      # /api/bookings/*
-│       ├── reviews.js       # /api/reviews/*
-│       ├── categories.js    # /api/categories/*
-│       ├── tutorManage.js   # /api/tutor/*
-│       └── admin.js         # /api/admin/*
-├── .env.example
-├── package.json
-└── README.md
+│   │   ├── api.ts                  # All API calls
+│   │   └── utils.ts                # Helper functions
+│   └── types/
+│       └── index.ts                # TypeScript types
+├── .env.local                      # Environment variables (create this)
+├── .env.example                    # Example env file
+├── next.config.js
+├── tailwind.config.js
+├── tsconfig.json
+└── package.json
 ```
 
 ---
 
-## API Reference
+## Pages and Routes
 
-### Authentication
-| Method | Endpoint            | Auth    | Body / Params                          |
-|--------|---------------------|---------|----------------------------------------|
-| POST   | /api/auth/register  | None    | name, email, password, role            |
-| POST   | /api/auth/login     | None    | email, password                        |
-| GET    | /api/auth/me        | Bearer  | —                                      |
+### Public Routes (Login না করেও দেখা যাবে)
+| Route | Page | Description |
+|-------|------|-------------|
+| `/` | Home | Hero section, categories, how it works |
+| `/tutors` | Browse Tutors | Search, filter, sort tutors |
+| `/tutors/:id` | Tutor Profile | Full profile, reviews, booking form |
+| `/login` | Login | Sign in page |
+| `/register` | Register | Sign up as Student or Tutor |
 
-### Tutors (Public)
-| Method | Endpoint            | Auth    | Query Params                           |
-|--------|---------------------|---------|----------------------------------------|
-| GET    | /api/tutors         | None    | search, category, minRate, maxRate, minRating, sort |
-| GET    | /api/tutors/:id     | None    | —                                      |
+### Student Routes (Student login করলে)
+| Route | Page | Description |
+|-------|------|-------------|
+| `/dashboard` | Dashboard | Overview, upcoming sessions |
+| `/dashboard/bookings` | My Bookings | All bookings, cancel, leave review |
+| `/dashboard/profile` | Profile | Edit personal info |
 
-### Categories
-| Method | Endpoint            | Auth    | Notes                                  |
-|--------|---------------------|---------|----------------------------------------|
-| GET    | /api/categories     | None    | —                                      |
-| POST   | /api/categories     | Admin   | name, description                      |
-| DELETE | /api/categories/:id | Admin   | —                                      |
+### Tutor Routes (Tutor login করলে)
+| Route | Page | Description |
+|-------|------|-------------|
+| `/tutor/dashboard` | Dashboard | Sessions, earnings stats |
+| `/tutor/profile` | Profile | Edit bio, rate, subjects |
+| `/tutor/availability` | Availability | Set weekly time slots |
 
-### Bookings
-| Method | Endpoint                    | Auth    | Notes                      |
-|--------|-----------------------------|---------|----------------------------|
-| POST   | /api/bookings               | Student | Create booking             |
-| GET    | /api/bookings               | Student/Tutor | My bookings          |
-| GET    | /api/bookings/:id           | Student/Tutor/Admin | —            |
-| PATCH  | /api/bookings/:id/cancel    | Student | CONFIRMED → CANCELLED      |
-| PATCH  | /api/bookings/:id/complete  | Tutor   | CONFIRMED → COMPLETED      |
+### Admin Routes (Admin login করলে)
+| Route | Page | Description |
+|-------|------|-------------|
+| `/admin` | Overview | Platform statistics |
+| `/admin/users` | Users | Search, ban/unban users |
+| `/admin/bookings` | Bookings | View all bookings |
+| `/admin/categories` | Categories | Add/delete categories |
 
-### Reviews
-| Method | Endpoint      | Auth    | Notes                                  |
-|--------|---------------|---------|----------------------------------------|
-| POST   | /api/reviews  | Student | Only on COMPLETED bookings, 1 per booking |
+---
 
-### Tutor Self-Management
-| Method | Endpoint               | Auth  | Notes                       |
-|--------|------------------------|-------|-----------------------------|
-| GET    | /api/tutor/profile     | Tutor | Own profile with categories |
-| PUT    | /api/tutor/profile     | Tutor | bio, hourlyRate, experience, categoryIds |
-| PUT    | /api/tutor/availability| Tutor | Replace all availability slots |
+## Demo Accounts
 
-### Admin
-| Method | Endpoint              | Auth  | Notes                          |
-|--------|-----------------------|-------|--------------------------------|
-| GET    | /api/admin/stats      | Admin | Platform statistics            |
-| GET    | /api/admin/users      | Admin | ?role=TUTOR&search=name        |
-| PATCH  | /api/admin/users/:id  | Admin | { isBanned: true/false }       |
-| GET    | /api/admin/bookings   | Admin | ?status=CONFIRMED              |
+| Role | Email | Password |
+|------|-------|----------|
+| Admin | jhadam904@gmail.com | admin123 |
+| Tutor | sarah@skillbridge.com | tutor123 |
+| Student | alex@example.com | student123 |
+
+---
+
+## Tech Stack
+
+| Technology | Purpose |
+|------------|---------|
+| Next.js 14 | App Router, SSR |
+| TypeScript | Type safety |
+| Tailwind CSS | Styling |
+| shadcn/ui | UI components |
+| Fraunces | Display font |
+| DM Sans | Body font |
 
 ---
 
 ## NPM Scripts
 
 ```bash
-npm run dev          # Start with nodemon (auto-reload)
-npm start            # Start production server
-npm run db:seed      # Seed demo data
-npm run db:push      # Push schema changes to DB
-npm run db:migrate   # Run Prisma migrations
-npm run db:studio    # Open Prisma Studio (GUI)
-npm run db:reset     # Reset DB and re-seed
+npm run dev      # Development server (http://localhost:3000)
+npm run build    # Production build
+npm run start    # Start production server
+npm run lint     # Run ESLint
 ```
 
 ---
 
-## Database Models
+## Environment Variables
 
-| Model           | Description                                   |
-|-----------------|-----------------------------------------------|
-| User            | Auth + role (STUDENT / TUTOR / ADMIN)         |
-| TutorProfile    | Tutor-specific info linked to User            |
-| Category        | Subject categories                            |
-| TutorCategory   | Many-to-many: tutors ↔ categories             |
-| Availability    | Weekly time slots per tutor                   |
-| Booking         | Session bookings (CONFIRMED/COMPLETED/CANCELLED) |
-| Review          | Student reviews (1 per completed booking)     |
+| Variable | Value | Description |
+|----------|-------|-------------|
+| `NEXT_PUBLIC_API_URL` | `http://localhost:5000/api` | Backend API URL |
 
 ---
 
-## Deployment (Render)
+## Common Errors and Fixes
 
-1. Create a **Web Service** on [render.com](https://render.com)
-2. Set root directory to `backend/`
-3. Build command: `npm install && npx prisma generate`
-4. Start command: `npm start`
-5. Add environment variables from `.env.example`
-6. Use a **PostgreSQL** database (Render or Neon or Supabase)
+### Error: "Login failed"
+**Fix:** Backend চালু আছে কিনা দেখো। `http://localhost:5000/api/health` ব্রাউজারে খোলো।
+
+### Error: "Failed to fetch"
+**Fix:** `.env.local` ফাইলে `NEXT_PUBLIC_API_URL` সেট আছে কিনা দেখো।
+
+### Error: Module not found
+**Fix:**
+```bash
+npm install
+```
+
+### Error: Port 3000 already in use
+**Fix:**
+```bash
+# Windows
+netstat -ano | findstr :3000
+taskkill /PID <PID> /F
+
+# তারপর আবার
+npm run dev
+```
+
+---
+
+## Deployment (Vercel)
+
+1. [vercel.com](https://vercel.com) এ account খোলো
+2. GitHub repo import করো
+3. Root directory: `frontend`
+4. Environment variable যোগ করো:
+   ```
+   NEXT_PUBLIC_API_URL = https://your-backend.onrender.com/api
+   ```
+5. Deploy করো
