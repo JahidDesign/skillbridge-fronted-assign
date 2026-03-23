@@ -11,7 +11,6 @@ export interface User {
   createdAt?: string;
   tutorProfile?: TutorProfile;
 }
-
 export interface Category {
   id: string;
   name: string;
