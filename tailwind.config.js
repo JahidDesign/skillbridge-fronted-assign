@@ -8,6 +8,12 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        // Both sans and display use Lexend, loaded via next/font in layout.tsx
+        sans: ["var(--font-lexend)", "sans-serif"],
+        display: ["var(--font-lexend)", "sans-serif"],
+        mono: ["ui-monospace", "SFMono-Regular", "monospace"],
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -38,15 +44,26 @@ module.exports = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        popover: {
+          DEFAULT: "hsl(var(--popover))",
+          foreground: "hsl(var(--popover-foreground))",
+        },
+        // Orange shorthands — usable as bg-orange, text-orange-dark, etc.
+        orange: {
+          DEFAULT: "#ea580c",
+          dark: "#c2410c",
+          pale: "#fff7ed",
+          border: "#fed7aa",
+          light: "#fb923c",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
-      },
-      fontFamily: {
-        sans: ["var(--font-dm-sans)"],
-        display: ["var(--font-fraunces)"],
+        xl: "calc(var(--radius) + 4px)",
+        "2xl": "calc(var(--radius) + 8px)",
+        "3xl": "28px",
       },
       keyframes: {
         "accordion-down": {
@@ -61,11 +78,19 @@ module.exports = {
           from: { opacity: 0, transform: "translateY(8px)" },
           to: { opacity: 1, transform: "translateY(0)" },
         },
+        "marquee": {
+          from: { transform: "translateX(0)" },
+          to: { transform: "translateX(-50%)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         "fade-in": "fade-in 0.4s ease-out forwards",
+        "fade-in-delay-1": "fade-in 0.4s ease-out 0.1s forwards",
+        "fade-in-delay-2": "fade-in 0.4s ease-out 0.2s forwards",
+        "fade-in-delay-3": "fade-in 0.4s ease-out 0.3s forwards",
+        "marquee": "marquee 22s linear infinite",
       },
     },
   },

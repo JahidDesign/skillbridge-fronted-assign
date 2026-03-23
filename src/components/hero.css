@@ -1,0 +1,219 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700&display=swap');
+
+/* ════════════════════════════════
+           KEYFRAMES
+        ════════════════════════════════ */
+@keyframes hi-float-a {
+
+  0%,
+  100% {
+    transform: translateY(0)
+  }
+
+  50% {
+    transform: translateY(-10px)
+  }
+}
+
+@keyframes hi-float-b {
+
+  0%,
+  100% {
+    transform: translateY(0)
+  }
+
+  50% {
+    transform: translateY(-7px)
+  }
+}
+
+@keyframes hi-float-c {
+
+  0%,
+  100% {
+    transform: translateY(0)
+  }
+
+  50% {
+    transform: translateY(-13px)
+  }
+}
+
+@keyframes hi-pop-in {
+  from {
+    opacity: 0;
+    transform: scale(.7)
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1)
+  }
+}
+
+@keyframes hi-spin-slow {
+  from {
+    transform: rotate(0deg)
+  }
+
+  to {
+    transform: rotate(360deg)
+  }
+}
+
+@keyframes hi-dash-flow {
+  to {
+    stroke-dashoffset: -24
+  }
+}
+
+@keyframes hi-blink {
+
+  0%,
+  100% {
+    opacity: 1
+  }
+
+  50% {
+    opacity: .2
+  }
+}
+
+@keyframes hi-pulse {
+
+  0%,
+  100% {
+    opacity: .6;
+    transform: scale(1)
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.12)
+  }
+}
+
+/* ════════════════════════════════
+           ANIMATION CLASSES
+        ════════════════════════════════ */
+.hi-fa {
+  animation: hi-float-a 4s ease-in-out infinite;
+  transform-origin: center;
+  transform-box: fill-box;
+}
+
+.hi-fb {
+  animation: hi-float-b 5s ease-in-out infinite;
+  transform-origin: center;
+  transform-box: fill-box;
+}
+
+.hi-fc {
+  animation: hi-float-c 3.5s ease-in-out infinite;
+  transform-origin: center;
+  transform-box: fill-box;
+}
+
+.hi-spin {
+  animation: hi-spin-slow 16s linear infinite;
+  transform-origin: 50% 50%;
+  transform-box: fill-box;
+}
+
+.hi-flow {
+  animation: hi-dash-flow 1.2s linear infinite;
+}
+
+.hi-blink {
+  animation: hi-blink 1.4s ease-in-out infinite;
+}
+
+.hi-pulse {
+  animation: hi-pulse 2s ease-in-out infinite;
+  transform-origin: center;
+  transform-box: fill-box;
+}
+
+/* Pop-in stagger */
+.hi-p1 {
+  animation: hi-pop-in .5s cubic-bezier(.34, 1.56, .64, 1) .00s both;
+}
+
+.hi-p2 {
+  animation: hi-pop-in .5s cubic-bezier(.34, 1.56, .64, 1) .15s both;
+}
+
+.hi-p3 {
+  animation: hi-pop-in .5s cubic-bezier(.34, 1.56, .64, 1) .30s both;
+}
+
+.hi-p4 {
+  animation: hi-pop-in .5s cubic-bezier(.34, 1.56, .64, 1) .45s both;
+}
+
+.hi-p5 {
+  animation: hi-pop-in .5s cubic-bezier(.34, 1.56, .64, 1) .60s both;
+}
+
+.hi-p6 {
+  animation: hi-pop-in .5s cubic-bezier(.34, 1.56, .64, 1) .75s both;
+}
+
+/* ════════════════════════════════
+           RESPONSIVE CONTAINER
+        ════════════════════════════════ */
+.hi-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+.hi-wrap svg {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+  display: block;
+}
+
+/* ── Large desktop (≥1024px): full illustration, all elements visible ── */
+
+/* ── Tablet (≤860px): hide side cards, show hub + chips only ── */
+@media (max-width: 860px) {
+
+  .hi-side-left,
+  .hi-side-right {
+    display: none;
+  }
+
+  /* Connector lines also hidden since cards are gone */
+  .hi-connectors {
+    display: none;
+  }
+}
+
+/* ── Small mobile (≤480px): hide everything but the hub circle ── */
+@media (max-width: 480px) {
+  .hi-top-chip {
+    display: none;
+  }
+
+  .hi-bottom-chips {
+    display: none;
+  }
+
+  .hi-rings {
+    display: none;
+  }
+
+  .hi-dots {
+    display: none;
+  }
+}
+
+/* ── Tiny (≤360px): completely hide illustration so page doesn't feel crowded ── */
+@media (max-width: 360px) {
+  .hi-wrap {
+    display: none;
+  }
+}
