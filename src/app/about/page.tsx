@@ -55,17 +55,12 @@ const TESTIMONIALS = [
 ];
 
 /* ─────────────────────────────────────────
-   VIDEO SOURCES  (Mixkit CDN — CC0, free)
+   VIDEO  — your Cloudinary upload
+   Used for BOTH the hero (500 px) and the
+   CTA section background.
 ───────────────────────────────────────── */
-// Hero section (500 px tall) — same CDN videos as background
-const HERO_VIDEO_PRIMARY  = "https://assets.mixkit.co/videos/preview/mixkit-students-studying-in-a-library-4k-40090-large.mp4";
-const HERO_VIDEO_FALLBACK = "https://assets.mixkit.co/videos/preview/mixkit-girl-studying-on-her-laptop-at-home-18675-large.mp4";
-const HERO_POSTER         = "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1400&h=500&fit=crop&q=80";
-
-// CTA section — same videos reused
-const CTA_VIDEO_PRIMARY   = HERO_VIDEO_PRIMARY;
-const CTA_VIDEO_FALLBACK  = HERO_VIDEO_FALLBACK;
-const CTA_POSTER          = "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1600&h=720&fit=crop&q=80";
+const VIDEO_SRC    = "https://res.cloudinary.com/dgdlyrgda/video/upload/v1774236244/5473805-uhd_4096_2160_25fps_ecidyh.mp4";
+const VIDEO_POSTER = "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1600&h=720&fit=crop&q=80";
 
 /* ─────────────────────────────────────────
    STYLES  (scoped under .ab-root)
@@ -119,11 +114,13 @@ const STYLES = `
   .ab-py { padding-top: var(--ab-py); padding-bottom: var(--ab-py); }
 
   /* ── ATOMS ── */
+
+  /* Pill for dark / video sections */
   .ab-pill {
     display: inline-flex; align-items: center; gap: 6px;
-    background: rgba(255,255,255,.15);
-    color: #fff;
-    border: 1px solid rgba(255,255,255,.30);
+    background: rgba(255,255,255,.14);
+    color: rgba(255,255,255,.95);
+    border: 1px solid rgba(255,255,255,.28);
     border-radius: 100px;
     padding: 5px 14px; font-size: 11px; font-weight: 700;
     letter-spacing: .07em; text-transform: uppercase;
@@ -131,7 +128,7 @@ const STYLES = `
     backdrop-filter: blur(6px);
   }
 
-  /* Pill variant for light sections */
+  /* Pill for light sections */
   .ab-pill-light {
     display: inline-flex; align-items: center; gap: 6px;
     background: var(--ab-brand-light); color: var(--ab-brand-deep);
@@ -140,6 +137,7 @@ const STYLES = `
     letter-spacing: .07em; text-transform: uppercase; margin-bottom: 14px;
   }
 
+  /* Headings */
   .ab-h1 {
     font-family: var(--ab-display);
     font-size: clamp(32px, 5vw, 58px);
@@ -170,108 +168,99 @@ const STYLES = `
   }
   .ab-btn { background: var(--ab-brand); color: #fff; box-shadow: var(--ab-sh-brand); }
   .ab-btn:hover { background: var(--ab-brand-deep); transform: translateY(-2px); box-shadow: 0 12px 32px rgba(249,115,22,.40); }
-
   .ab-btn-ghost { background: var(--ab-bg-1); color: var(--ab-ink-2); border: 1.5px solid var(--ab-line-2); box-shadow: var(--ab-sh-sm); }
   .ab-btn-ghost:hover { border-color: var(--ab-brand); color: var(--ab-brand-deep); transform: translateY(-2px); }
-
-  .ab-btn-white { background: #fff; color: var(--ab-ink-1); box-shadow: 0 4px 20px rgba(0,0,0,.18); }
-  .ab-btn-white:hover { background: #f5f3ef; transform: translateY(-2px); box-shadow: 0 10px 32px rgba(0,0,0,.28); }
-
+  .ab-btn-white { background: #fff; color: var(--ab-ink-1); box-shadow: 0 4px 20px rgba(0,0,0,.20); }
+  .ab-btn-white:hover { background: #f5f3ef; transform: translateY(-2px); box-shadow: 0 10px 32px rgba(0,0,0,.30); }
   .ab-btn-outline-white {
     background: rgba(255,255,255,.12); color: #fff;
     border: 1.5px solid rgba(255,255,255,.32); backdrop-filter: blur(8px);
   }
-  .ab-btn-outline-white:hover { background: rgba(255,255,255,.22); border-color: rgba(255,255,255,.55); transform: translateY(-2px); }
+  .ab-btn-outline-white:hover { background: rgba(255,255,255,.22); border-color: rgba(255,255,255,.58); transform: translateY(-2px); }
 
 
   /* ══════════════════════════════════════
-     HERO — video background, fixed 500px
+     HERO — Cloudinary video, fixed 500px
   ══════════════════════════════════════ */
   .ab-hero {
     position: relative;
     overflow: hidden;
-    height: 500px;           /* ← fixed 500 px */
+    height: 500px;
     display: flex;
     align-items: center;
     color: #fff;
-    border-bottom: 1px solid rgba(0,0,0,.15);
+    border-bottom: 1px solid rgba(0,0,0,.18);
   }
 
-  /* The background video */
+  /* Video fills the entire 500 px block */
   .ab-hero-video {
     position: absolute; inset: 0;
     width: 100%; height: 100%;
-    object-fit: cover; object-position: center 30%;
+    object-fit: cover; object-position: center 35%;
     z-index: 0;
   }
 
-  /* Rich dark overlay — keeps text sharp over any scene */
+  /* Multi-layer dark overlay */
   .ab-hero-overlay {
     position: absolute; inset: 0; z-index: 1;
     background: linear-gradient(
-      135deg,
-      rgba(10,8,7,.88)  0%,
-      rgba(25,8,0,.76)  50%,
-      rgba(10,8,7,.84)  100%
+      130deg,
+      rgba(8,6,5,.90)  0%,
+      rgba(22,8,0,.78)  48%,
+      rgba(8,6,5,.85)  100%
     );
   }
+  /* Brand warm wash */
   .ab-hero-overlay::after {
     content: ''; position: absolute; inset: 0;
-    background: radial-gradient(ellipse 75% 65% at 35% 55%, rgba(249,115,22,.20) 0%, transparent 62%);
+    background: radial-gradient(ellipse 72% 60% at 32% 55%, rgba(249,115,22,.22) 0%, transparent 60%);
   }
 
   /* Glow orbs */
-  .ab-hero-orb {
-    position: absolute; z-index: 2; border-radius: 50%; pointer-events: none;
-  }
+  .ab-hero-orb { position: absolute; z-index: 2; border-radius: 50%; pointer-events: none; }
   .ab-hero-orb-1 {
-    width: 480px; height: 480px; top: -180px; left: -120px;
-    background: radial-gradient(circle, rgba(249,115,22,.14) 0%, transparent 68%);
+    width: 500px; height: 500px; top: -200px; left: -130px;
+    background: radial-gradient(circle, rgba(249,115,22,.15) 0%, transparent 68%);
   }
   .ab-hero-orb-2 {
-    width: 360px; height: 360px; bottom: -140px; right: -80px;
+    width: 360px; height: 360px; bottom: -150px; right: -80px;
     background: radial-gradient(circle, rgba(251,191,36,.10) 0%, transparent 68%);
   }
 
-  /* Content layer */
+  /* Content — two columns */
   .ab-hero-inner {
     position: relative; z-index: 3;
-    max-width: var(--ab-max);
-    width: 100%;
+    max-width: var(--ab-max); width: 100%;
     margin: 0 auto;
     padding: 0 var(--ab-px);
+    /* leave room for trust strip */
+    padding-bottom: 52px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: clamp(32px, 6vw, 72px);
   }
   @media (max-width: 768px) {
-    .ab-hero-inner { flex-direction: column; text-align: center; justify-content: center; }
+    .ab-hero-inner { flex-direction: column; text-align: center; justify-content: center; padding-bottom: 60px; }
   }
 
-  /* Left — text */
   .ab-hero-text { flex: 1; min-width: 0; }
-
   .ab-hero-desc {
-    font-size: clamp(14px, 1.7vw, 17px); line-height: 1.7;
-    color: rgba(255,255,255,.72);
+    font-size: clamp(14px, 1.7vw, 17px); line-height: 1.72;
+    color: rgba(255,255,255,.70);
     margin: 14px 0 30px; max-width: 500px;
   }
   @media (max-width: 768px) { .ab-hero-desc { margin-left: auto; margin-right: auto; } }
-
   .ab-hero-btns { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
   @media (max-width: 768px) { .ab-hero-btns { justify-content: center; } }
 
-  /* Right — stat cards */
+  /* Right — frosted glass stat cards */
   .ab-hero-aside {
     flex-shrink: 0;
     display: flex; flex-direction: column; gap: 10px;
     width: clamp(200px, 22vw, 250px);
   }
-  @media (max-width: 768px) {
-    .ab-hero-aside { flex-direction: row; flex-wrap: wrap; width: 100%; justify-content: center; }
-  }
-  @media (max-width: 500px) { .ab-hero-aside { display: none; } }
+  @media (max-width: 860px) { .ab-hero-aside { display: none; } }
 
   .ab-hero-stat {
     display: flex; align-items: center; gap: 12px;
@@ -279,10 +268,10 @@ const STYLES = `
     border: 1px solid rgba(255,255,255,.18);
     border-radius: var(--ab-r-md);
     padding: 11px 15px;
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(12px);
     transition: background .2s, transform .2s;
   }
-  .ab-hero-stat:hover { background: rgba(255,255,255,.16); transform: translateY(-2px); }
+  .ab-hero-stat:hover { background: rgba(255,255,255,.17); transform: translateY(-2px); }
   .ab-hero-stat-icon {
     display: inline-flex; align-items: center; justify-content: center;
     width: 34px; height: 34px; border-radius: var(--ab-r-sm); flex-shrink: 0;
@@ -291,17 +280,18 @@ const STYLES = `
     font-family: var(--ab-display); font-size: 19px; font-weight: 900; line-height: 1;
     color: #fff; margin-bottom: 2px;
   }
-  .ab-hero-stat-lbl { font-size: 10.5px; font-weight: 600; color: rgba(255,255,255,.55); text-transform: uppercase; letter-spacing: .05em; }
+  .ab-hero-stat-lbl { font-size: 10.5px; font-weight: 600; color: rgba(255,255,255,.52); text-transform: uppercase; letter-spacing: .05em; }
 
-  /* Trust strip at the bottom of the hero */
+  /* Trust strip — pinned to the bottom of the hero */
   .ab-hero-trust {
-    position: absolute; bottom: 0; left: 0; right: 0; z-index: 3;
-    background: rgba(0,0,0,.38); backdrop-filter: blur(8px);
-    border-top: 1px solid rgba(255,255,255,.1);
+    position: absolute; bottom: 0; left: 0; right: 0; z-index: 4;
+    background: rgba(0,0,0,.42);
+    backdrop-filter: blur(10px);
+    border-top: 1px solid rgba(255,255,255,.10);
   }
   .ab-hero-trust-inner {
     max-width: var(--ab-max); margin: 0 auto;
-    padding: 12px var(--ab-px);
+    padding: 11px var(--ab-px);
     display: flex; flex-wrap: wrap; align-items: center; justify-content: center;
     gap: 6px 22px;
   }
@@ -331,10 +321,7 @@ const STYLES = `
     .ab-stat-cell:nth-child(3) { border-right: 1px solid var(--ab-line); }
     .ab-stat-cell:nth-child(1), .ab-stat-cell:nth-child(2) { border-bottom: 1px solid var(--ab-line); }
   }
-  .ab-stat-icon {
-    display: inline-flex; align-items: center; justify-content: center;
-    width: 40px; height: 40px; border-radius: var(--ab-r-sm); margin: 0 auto 12px; transition: transform .2s;
-  }
+  .ab-stat-icon { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: var(--ab-r-sm); margin: 0 auto 12px; transition: transform .2s; }
   .ab-stat-cell:hover .ab-stat-icon { transform: scale(1.1) rotate(-4deg); }
   .ab-icon--indigo  { background: #eef2ff; color: #4f46e5; }
   .ab-icon--sky     { background: #f0f9ff; color: #0284c7; }
@@ -368,11 +355,7 @@ const STYLES = `
   .ab-val-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 18px; }
   @media (max-width: 900px) { .ab-val-grid { grid-template-columns: repeat(2,1fr); } }
   @media (max-width: 480px) { .ab-val-grid { grid-template-columns: 1fr; } }
-  .ab-val-card {
-    background: var(--ab-bg-1); border: 1.5px solid var(--ab-line); border-radius: var(--ab-r-lg);
-    padding: 26px 22px 28px; position: relative; overflow: hidden;
-    transition: box-shadow .25s, transform .25s, border-color .25s;
-  }
+  .ab-val-card { background: var(--ab-bg-1); border: 1.5px solid var(--ab-line); border-radius: var(--ab-r-lg); padding: 26px 22px 28px; position: relative; overflow: hidden; transition: box-shadow .25s, transform .25s, border-color .25s; }
   .ab-val-card::after { content:''; position:absolute; top:0; left:0; right:0; height:3px; opacity:0; transition:opacity .25s; border-radius:3px 3px 0 0; }
   .ab-val-card:hover { box-shadow: var(--ab-sh-lg); transform: translateY(-5px); border-color: var(--ab-line-2); }
   .ab-val-card:hover::after { opacity: 1; }
@@ -427,12 +410,12 @@ const STYLES = `
   .ab-testi-sub  { font-size: 11.5px; color: var(--ab-ink-4); }
 
   /* ══════════════════════════════════════
-     CTA — VIDEO BACKGROUND
+     CTA — same Cloudinary video background
   ══════════════════════════════════════ */
   .ab-cta-wrap {
     position: relative; overflow: hidden;
     color: #fff;
-    min-height: 540px; display: flex; align-items: center;
+    min-height: 560px; display: flex; align-items: center;
   }
   .ab-cta-video {
     position: absolute; inset: 0;
@@ -442,20 +425,16 @@ const STYLES = `
   }
   .ab-cta-overlay {
     position: absolute; inset: 0; z-index: 1;
-    background: linear-gradient(135deg, rgba(10,8,7,.92) 0%, rgba(28,10,0,.80) 50%, rgba(10,8,7,.88) 100%);
+    background: linear-gradient(135deg, rgba(8,6,5,.92) 0%, rgba(26,10,0,.80) 50%, rgba(8,6,5,.88) 100%);
   }
   .ab-cta-overlay::after {
     content: ''; position: absolute; inset: 0;
-    background: radial-gradient(ellipse 80% 72% at 60% 52%, rgba(249,115,22,.22) 0%, transparent 64%);
+    background: radial-gradient(ellipse 80% 72% at 60% 52%, rgba(249,115,22,.23) 0%, transparent 64%);
   }
   .ab-cta-orb { position: absolute; z-index: 2; border-radius: 50%; pointer-events: none; }
   .ab-cta-orb-1 { width: 520px; height: 520px; top: -160px; left: -140px; background: radial-gradient(circle, rgba(249,115,22,.16) 0%, transparent 70%); }
-  .ab-cta-orb-2 { width: 400px; height: 400px; bottom: -120px; right: -100px; background: radial-gradient(circle, rgba(251,191,36,.13) 0%, transparent 70%); }
-  .ab-cta-inner {
-    position: relative; z-index: 3; width: 100%;
-    padding: clamp(72px, 10vw, 120px) var(--ab-px);
-    text-align: center; max-width: var(--ab-max); margin: 0 auto;
-  }
+  .ab-cta-orb-2 { width: 400px; height: 400px; bottom: -120px; right: -100px; background: radial-gradient(circle, rgba(251,191,36,.12) 0%, transparent 70%); }
+  .ab-cta-inner { position: relative; z-index: 3; width: 100%; padding: clamp(72px, 10vw, 120px) var(--ab-px); text-align: center; max-width: var(--ab-max); margin: 0 auto; }
   .ab-cta-badge {
     display: inline-flex; align-items: center; gap: 8px;
     background: rgba(255,255,255,.12); color: rgba(255,255,255,.92);
@@ -466,8 +445,13 @@ const STYLES = `
   }
   .ab-cta-dot { width: 7px; height: 7px; border-radius: 50%; background: #34d399; animation: ab-pulse 2.2s ease-in-out infinite; }
   @keyframes ab-pulse { 0%,100% { opacity:1; transform:scale(1); } 50% { opacity:.5; transform:scale(.72); } }
-  .ab-cta-title { font-family: var(--ab-display); font-size: clamp(34px,6vw,66px); font-weight: 900; line-height: 1.05; letter-spacing: -.025em; color: #fff; margin-bottom: 18px; }
-  .ab-cta-title em { font-style: italic; color: #fb923c; }
+  .ab-cta-h2 {
+    font-family: var(--ab-display);
+    font-size: clamp(34px, 6vw, 66px);
+    font-weight: 900; line-height: 1.05; letter-spacing: -.025em;
+    color: #fff; margin-bottom: 18px;
+  }
+  .ab-cta-h2 em { font-style: italic; color: #fb923c; }
   .ab-cta-desc { font-size: clamp(15px,1.8vw,18px); line-height: 1.72; color: rgba(255,255,255,.62); max-width: 480px; margin: 0 auto 38px; }
   .ab-cta-btns { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 12px; margin-bottom: 48px; }
   .ab-cta-trust { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 8px 28px; padding-top: 28px; border-top: 1px solid rgba(255,255,255,.13); }
@@ -505,22 +489,20 @@ export default function AboutPage() {
         <Navbar />
 
         {/* ══════════════════════════════════════
-            HERO — 500 px, video background
-            Mixkit CDN (CC0, free, no attribution)
+            HERO — 500px, Cloudinary video BG
         ══════════════════════════════════════ */}
         <section className="ab-hero">
 
-          {/* Live video background */}
+          {/* Your Cloudinary video */}
           <video
             className="ab-hero-video"
             autoPlay
             loop
             muted
             playsInline
-            poster={HERO_POSTER}
+            poster={VIDEO_POSTER}
           >
-            <source src={HERO_VIDEO_PRIMARY}  type="video/mp4" />
-            <source src={HERO_VIDEO_FALLBACK} type="video/mp4" />
+            <source src={VIDEO_SRC} type="video/mp4" />
           </video>
 
           {/* Overlay + orbs */}
@@ -528,9 +510,10 @@ export default function AboutPage() {
           <div className="ab-hero-orb ab-hero-orb-1" />
           <div className="ab-hero-orb ab-hero-orb-2" />
 
-          {/* Content */}
+          {/* Main content */}
           <div className="ab-hero-inner">
-            {/* Left — headline + CTA */}
+
+            {/* Left — headline + buttons */}
             <div className="ab-hero-text">
               <div className="ab-pill">
                 <GraduationCap size={11} /> About SkillBridge
@@ -548,7 +531,7 @@ export default function AboutPage() {
               </div>
             </div>
 
-            {/* Right — frosted stat cards */}
+            {/* Right — frosted stat cards (hidden ≤ 860px) */}
             <div className="ab-hero-aside">
               {STATS.map(({ label, value, icon: Icon, cls }) => (
                 <div key={label} className="ab-hero-stat">
@@ -562,7 +545,7 @@ export default function AboutPage() {
             </div>
           </div>
 
-          {/* Trust strip pinned to the bottom of the hero */}
+          {/* Trust strip — pinned to hero bottom edge */}
           <div className="ab-hero-trust">
             <div className="ab-hero-trust-inner">
               <span className="ab-hero-trust-item"><CheckCircle2 size={12} /> No commitment needed</span>
@@ -711,17 +694,15 @@ export default function AboutPage() {
         </section>
 
         {/* ══════════════════════════════════════
-            CTA — VIDEO BACKGROUND
-            Same Mixkit CDN sources as the hero
+            CTA — same Cloudinary video background
         ══════════════════════════════════════ */}
         <section className="ab-cta-wrap">
           <video
             className="ab-cta-video"
             autoPlay loop muted playsInline
-            poster={CTA_POSTER}
+            poster={VIDEO_POSTER}
           >
-            <source src={CTA_VIDEO_PRIMARY}  type="video/mp4" />
-            <source src={CTA_VIDEO_FALLBACK} type="video/mp4" />
+            <source src={VIDEO_SRC} type="video/mp4" />
           </video>
 
           <div className="ab-cta-overlay" />
@@ -734,7 +715,7 @@ export default function AboutPage() {
               1,200+ sessions booked this month
             </div>
 
-            <h2 className="ab-cta-title">
+            <h2 className="ab-cta-h2">
               Ready to Start<br /><em>Learning?</em>
             </h2>
 
