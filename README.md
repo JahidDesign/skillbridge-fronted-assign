@@ -1,3 +1,9 @@
+
+
+<video src="https://drive.google.com/uc?export=download&id=1os1zRso1WN7iDMsLWnVu-r_tR3YmoA_3" width="100%" controls>
+  Your browser does not support the video tag.
+</video>
+
 # SkillBridge — Frontend
 
 Next.js 14 + TypeScript + Tailwind CSS + shadcn/ui
