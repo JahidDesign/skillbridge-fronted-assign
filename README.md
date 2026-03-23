@@ -1,8 +1,10 @@
 
 
-<video src="https://drive.google.com/uc?export=download&id=1os1zRso1WN7iDMsLWnVu-r_tR3YmoA_3" width="100%" controls>
-  Your browser does not support the video tag.
-</video>
+[![Watch the video](path/to/your/screenshot.png)](https://drive.google.com/file/d/1os1zRso1WN7iDMsLWnVu-r_tR3YmoA_3/view?usp=sharing)
+
+##Here is googledrive video link, I can't provied Assignment input box this charcteres up to 250 thats why I am Share here...
+
+https://drive.google.com/file/d/1os1zRso1WN7iDMsLWnVu-r_tR3YmoA_3/view?usp=sharing
 
 # SkillBridge — Frontend
 
