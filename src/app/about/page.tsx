@@ -19,30 +19,10 @@ const STATS = [
 ];
 
 const VALUES = [
-  {
-    icon: Heart,
-    title: "Student-First",
-    desc: "Every decision we make puts the learner at the center. Your growth is our mission.",
-    cls: "ab-val--rose",
-  },
-  {
-    icon: Star,
-    title: "Quality Tutors",
-    desc: "Every tutor is verified and reviewed. We only work with the best educators.",
-    cls: "ab-val--amber",
-  },
-  {
-    icon: Zap,
-    title: "Book Instantly",
-    desc: "No waiting, no back-and-forth. Find your tutor and book a session in minutes.",
-    cls: "ab-val--violet",
-  },
-  {
-    icon: Target,
-    title: "Any Subject",
-    desc: "From Calculus to Guitar, from Spanish to UI/UX — we cover it all.",
-    cls: "ab-val--sky",
-  },
+  { icon: Heart,  title: "Student-First",  desc: "Every decision we make puts the learner at the center. Your growth is our mission.",          cls: "ab-val--rose"   },
+  { icon: Star,   title: "Quality Tutors", desc: "Every tutor is verified and reviewed. We only work with the best educators.",                  cls: "ab-val--amber"  },
+  { icon: Zap,    title: "Book Instantly", desc: "No waiting, no back-and-forth. Find your tutor and book a session in minutes.",                cls: "ab-val--violet" },
+  { icon: Target, title: "Any Subject",    desc: "From Calculus to Guitar, from Spanish to UI/UX — we cover it all.",                           cls: "ab-val--sky"    },
 ];
 
 const TEAM = [
@@ -62,27 +42,24 @@ const MISSION_BULLETS = [
 const TESTIMONIALS = [
   {
     text: "I went from failing algebra to acing my finals in just 6 weeks. My tutor made everything click in a way my teacher never could.",
-    name: "Aisha Rahman",
-    sub: "Grade 11 · Mathematics",
-    avatar: "https://i.pravatar.cc/80?img=32",
+    name: "Aisha Rahman", sub: "Grade 11 · Mathematics", avatar: "https://i.pravatar.cc/80?img=32",
   },
   {
     text: "Booked my first Python session on a Thursday, landed my first freelance job the following month. SkillBridge changed my career.",
-    name: "Tom Eriksen",
-    sub: "Adult learner · Programming",
-    avatar: "https://i.pravatar.cc/80?img=57",
+    name: "Tom Eriksen",  sub: "Adult learner · Programming", avatar: "https://i.pravatar.cc/80?img=57",
   },
   {
     text: "My daughter's Spanish went from D to A in one semester. The tutor is patient, engaging, and genuinely passionate about teaching.",
-    name: "Linda Okafor",
-    sub: "Parent · Languages",
-    avatar: "https://i.pravatar.cc/80?img=25",
+    name: "Linda Okafor", sub: "Parent · Languages", avatar: "https://i.pravatar.cc/80?img=25",
   },
 ];
 
+/* ─────────────────────────────────────────
+   STYLES  (fully scoped under .ab-root)
+───────────────────────────────────────── */
 const STYLES = `
   /* ══════════════════════════════════════
-     TOKENS  (scoped under .ab-root)
+     TOKENS
   ══════════════════════════════════════ */
   .ab-root {
     --ab-body:    'Plus Jakarta Sans', system-ui, sans-serif;
@@ -98,11 +75,11 @@ const STYLES = `
     --ab-ink-3: #78716c;
     --ab-ink-4: #a8a29e;
 
-    --ab-bg-1: #ffffff;
-    --ab-bg-2: #faf9f7;
-    --ab-bg-3: #f5f3ef;
-    --ab-line: #e8e4de;
-    --ab-line-2: #d6d0c8;
+    --ab-bg-1:  #ffffff;
+    --ab-bg-2:  #faf9f7;
+    --ab-bg-3:  #f5f3ef;
+    --ab-line:  #e8e4de;
+    --ab-line-2:#d6d0c8;
 
     --ab-r-sm: 8px;
     --ab-r-md: 14px;
@@ -115,11 +92,11 @@ const STYLES = `
 
     --ab-max: 1160px;
     --ab-px:  clamp(20px, 5vw, 48px);
-    --ab-py:  clamp(64px, 9vw, 112px);
+    --ab-py:  clamp(60px, 8vw, 104px);
   }
 
   /* ══════════════════════════════════════
-     RESET  (children only)
+     BASE RESET  (scoped — no bleed)
   ══════════════════════════════════════ */
   .ab-root, .ab-root * { box-sizing: border-box; }
   .ab-root {
@@ -133,7 +110,7 @@ const STYLES = `
   }
 
   /* ══════════════════════════════════════
-     LAYOUT HELPERS
+     LAYOUT
   ══════════════════════════════════════ */
   .ab-inner {
     max-width: var(--ab-max);
@@ -149,438 +126,266 @@ const STYLES = `
 
   /* Eyebrow pill */
   .ab-pill {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
+    display: inline-flex; align-items: center; gap: 6px;
     background: var(--ab-brand-light);
     color: var(--ab-brand-deep);
     border: 1px solid var(--ab-brand-border);
     border-radius: 100px;
-    padding: 5px 14px;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: .07em;
-    text-transform: uppercase;
-    margin-bottom: 18px;
+    padding: 4px 13px;
+    font-size: 11px; font-weight: 700;
+    letter-spacing: .07em; text-transform: uppercase;
+    margin-bottom: 14px;
   }
 
   /* Headings */
   .ab-h1 {
     font-family: var(--ab-display);
-    font-size: clamp(38px, 6vw, 70px);
-    font-weight: 900;
-    line-height: 1.04;
-    letter-spacing: -.025em;
+    font-size: clamp(30px, 4.5vw, 52px);
+    font-weight: 900; line-height: 1.08; letter-spacing: -.022em;
     color: var(--ab-ink-1);
   }
   .ab-h1 em { font-style: italic; color: var(--ab-brand); }
 
   .ab-h2 {
     font-family: var(--ab-display);
-    font-size: clamp(26px, 4vw, 44px);
-    font-weight: 700;
-    line-height: 1.1;
-    letter-spacing: -.02em;
-    color: var(--ab-ink-1);
-    margin-bottom: 10px;
+    font-size: clamp(24px, 3.5vw, 40px);
+    font-weight: 700; line-height: 1.12; letter-spacing: -.018em;
+    color: var(--ab-ink-1); margin-bottom: 10px;
   }
   .ab-h2 em { font-style: italic; color: var(--ab-brand); }
 
   /* Section header block */
-  .ab-sec-head {
-    text-align: center;
-    margin-bottom: clamp(36px, 5vw, 60px);
-  }
-  .ab-sec-sub {
-    font-size: 15px;
-    color: var(--ab-ink-4);
-    margin-top: 6px;
-  }
+  .ab-sec-head { text-align: center; margin-bottom: clamp(32px, 5vw, 56px); }
+  .ab-sec-sub  { font-size: 15px; color: var(--ab-ink-4); margin-top: 6px; }
 
   /* ── Buttons ── */
-  .ab-btn,
-  .ab-btn-ghost,
-  .ab-btn-white,
-  .ab-btn-outline-white {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    border-radius: var(--ab-r-md);
-    padding: 13px 24px;
-    font-family: var(--ab-body);
-    font-size: 14.5px;
-    font-weight: 700;
-    cursor: pointer;
-    text-decoration: none;
-    border: none;
+  .ab-btn, .ab-btn-ghost, .ab-btn-white, .ab-btn-outline-white {
+    display: inline-flex; align-items: center; gap: 8px;
+    border-radius: var(--ab-r-md); padding: 12px 22px;
+    font-family: var(--ab-body); font-size: 14px; font-weight: 700;
+    cursor: pointer; text-decoration: none; border: none;
     transition: background .18s, transform .18s, box-shadow .18s, border-color .18s, color .18s;
     white-space: nowrap;
   }
-  /* Orange primary */
-  .ab-btn {
-    background: var(--ab-brand);
-    color: #fff;
-    box-shadow: var(--ab-sh-brand);
-  }
-  .ab-btn:hover {
-    background: var(--ab-brand-deep);
-    transform: translateY(-2px);
-    box-shadow: 0 12px 36px rgba(249,115,22,.38);
-  }
-  /* Outlined ghost */
-  .ab-btn-ghost {
-    background: var(--ab-bg-1);
-    color: var(--ab-ink-2);
-    border: 1.5px solid var(--ab-line-2);
-    box-shadow: var(--ab-sh-sm);
-  }
-  .ab-btn-ghost:hover {
-    border-color: var(--ab-brand);
-    color: var(--ab-brand-deep);
-    transform: translateY(-2px);
-  }
-  /* White (on dark bg) */
-  .ab-btn-white {
-    background: #fff;
-    color: var(--ab-ink-1);
-    box-shadow: 0 4px 20px rgba(0,0,0,.18);
-  }
-  .ab-btn-white:hover {
-    background: #f5f3ef;
-    transform: translateY(-2px);
-    box-shadow: 0 10px 32px rgba(0,0,0,.28);
-  }
-  /* Outline white (on dark bg) */
+  .ab-btn { background: var(--ab-brand); color: #fff; box-shadow: var(--ab-sh-brand); }
+  .ab-btn:hover { background: var(--ab-brand-deep); transform: translateY(-2px); box-shadow: 0 12px 32px rgba(249,115,22,.38); }
+
+  .ab-btn-ghost { background: var(--ab-bg-1); color: var(--ab-ink-2); border: 1.5px solid var(--ab-line-2); box-shadow: var(--ab-sh-sm); }
+  .ab-btn-ghost:hover { border-color: var(--ab-brand); color: var(--ab-brand-deep); transform: translateY(-2px); }
+
+  .ab-btn-white { background: #fff; color: var(--ab-ink-1); box-shadow: 0 4px 20px rgba(0,0,0,.18); }
+  .ab-btn-white:hover { background: #f5f3ef; transform: translateY(-2px); box-shadow: 0 10px 32px rgba(0,0,0,.28); }
+
   .ab-btn-outline-white {
-    background: rgba(255,255,255,.1);
-    color: #fff;
-    border: 1.5px solid rgba(255,255,255,.28);
-    backdrop-filter: blur(8px);
+    background: rgba(255,255,255,.1); color: #fff;
+    border: 1.5px solid rgba(255,255,255,.28); backdrop-filter: blur(8px);
   }
-  .ab-btn-outline-white:hover {
-    background: rgba(255,255,255,.2);
-    border-color: rgba(255,255,255,.5);
-    transform: translateY(-2px);
-  }
+  .ab-btn-outline-white:hover { background: rgba(255,255,255,.2); border-color: rgba(255,255,255,.5); transform: translateY(-2px); }
+
 
   /* ══════════════════════════════════════
-     HERO
+     HERO  — compact / standard size
   ══════════════════════════════════════ */
   .ab-hero {
-    position: relative;
-    overflow: hidden;
+    position: relative; overflow: hidden;
     background: var(--ab-bg-2);
     border-bottom: 1px solid var(--ab-line);
-    padding: clamp(80px, 11vw, 136px) var(--ab-px) clamp(72px, 10vw, 120px);
-    text-align: center;
-  }
-  .ab-hero-mesh {
-    position: absolute; inset: 0; pointer-events: none;
-    background:
-      radial-gradient(ellipse 72% 62% at 18% -8%,  rgba(249,115,22,.13) 0%, transparent 58%),
-      radial-gradient(ellipse 60% 50% at 88% 108%, rgba(251,191,36,.11) 0%, transparent 55%),
-      radial-gradient(ellipse 44% 40% at 50% 50%,  rgba(249,115,22,.05) 0%, transparent 68%);
-  }
-  .ab-hero-dots {
-    position: absolute; inset: 0; pointer-events: none;
-    background-image: radial-gradient(circle, rgba(0,0,0,.055) 1px, transparent 1px);
-    background-size: 26px 26px;
-    mask-image: radial-gradient(ellipse 92% 80% at 50% 50%, black 25%, transparent 100%);
-    opacity: .6;
-  }
-  .ab-hero-body {
-    position: relative; z-index: 1;
-    max-width: 700px; margin: 0 auto;
-  }
-  .ab-hero-desc {
-    font-size: clamp(15px, 2vw, 18px);
-    line-height: 1.72;
-    color: var(--ab-ink-3);
-    margin: 18px auto 36px;
-    max-width: 580px;
-  }
-  .ab-hero-btns {
-    display: flex; flex-wrap: wrap;
-    align-items: center; justify-content: center;
-    gap: 12px;
+    /* ↓ tight vertical padding for a "standard" header feel */
+    padding: clamp(48px, 7vw, 80px) var(--ab-px) clamp(44px, 6vw, 72px);
   }
 
-  /* Trust strip */
-  .ab-trust {
-    display: flex; flex-wrap: wrap;
-    align-items: center; justify-content: center;
-    gap: 8px 24px;
-    margin-top: 42px;
-    padding-top: 32px;
-    border-top: 1px solid var(--ab-line);
+  /* Subtle warm gradient wash — not overwhelming */
+  .ab-hero-wash {
+    position: absolute; inset: 0; pointer-events: none;
+    background:
+      radial-gradient(ellipse 60% 100% at 0% 50%,   rgba(249,115,22,.08) 0%, transparent 55%),
+      radial-gradient(ellipse 50% 80%  at 100% 50%,  rgba(251,191,36,.07) 0%, transparent 55%);
   }
-  .ab-trust-item {
-    display: flex; align-items: center; gap: 6px;
-    font-size: 13px; font-weight: 500;
-    color: var(--ab-ink-3);
+
+  /* Thin horizontal rule accent */
+  .ab-hero-accent {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    height: 2px; pointer-events: none;
+    background: linear-gradient(to right, transparent, var(--ab-brand-border) 30%, var(--ab-brand-border) 70%, transparent);
+    opacity: .6;
   }
-  .ab-trust-item svg { color: var(--ab-brand); flex-shrink: 0; }
-  .ab-trust-sep { width: 1px; height: 14px; background: var(--ab-line-2); }
-  @media (max-width: 500px) {
-    .ab-trust-sep { display: none; }
-    .ab-trust { gap: 10px 16px; }
+
+  .ab-hero-inner {
+    position: relative; z-index: 1;
+    max-width: var(--ab-max); margin: 0 auto;
+    display: flex; align-items: center;
+    gap: clamp(32px, 6vw, 72px);
   }
+  @media (max-width: 768px) {
+    .ab-hero-inner { flex-direction: column; text-align: center; }
+  }
+
+  /* Left text column */
+  .ab-hero-text { flex: 1; min-width: 0; }
+
+  .ab-hero-desc {
+    font-size: clamp(14px, 1.6vw, 16.5px); line-height: 1.72;
+    color: var(--ab-ink-3); margin: 14px 0 26px;
+    max-width: 520px;
+  }
+  @media (max-width: 768px) { .ab-hero-desc { margin-left: auto; margin-right: auto; } }
+
+  .ab-hero-btns { display: flex; flex-wrap: wrap; gap: 10px; }
+  @media (max-width: 768px) { .ab-hero-btns { justify-content: center; } }
+
+  /* Right breadcrumb / stat block */
+  .ab-hero-aside {
+    flex-shrink: 0;
+    display: flex; flex-direction: column; gap: 14px;
+    width: clamp(200px, 22vw, 260px);
+  }
+  @media (max-width: 768px) {
+    .ab-hero-aside { flex-direction: row; flex-wrap: wrap; width: 100%; justify-content: center; }
+  }
+
+  .ab-hero-stat {
+    display: flex; align-items: center; gap: 12px;
+    background: var(--ab-bg-1);
+    border: 1.5px solid var(--ab-line);
+    border-radius: var(--ab-r-md);
+    padding: 12px 16px;
+    box-shadow: var(--ab-sh-sm);
+    transition: box-shadow .2s, transform .2s;
+  }
+  .ab-hero-stat:hover { box-shadow: var(--ab-sh-md); transform: translateY(-2px); }
+
+  .ab-hero-stat-icon {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 36px; height: 36px; border-radius: var(--ab-r-sm);
+    flex-shrink: 0;
+  }
+  .ab-hero-stat-body {}
+  .ab-hero-stat-val {
+    font-family: var(--ab-display);
+    font-size: 20px; font-weight: 900; line-height: 1;
+    color: var(--ab-ink-1); margin-bottom: 2px;
+  }
+  .ab-hero-stat-lbl { font-size: 11px; font-weight: 600; color: var(--ab-ink-4); text-transform: uppercase; letter-spacing: .05em; }
 
   /* ══════════════════════════════════════
      STATS BAR
   ══════════════════════════════════════ */
-  .ab-stats-wrap {
-    background: var(--ab-bg-1);
-    border-bottom: 1px solid var(--ab-line);
-  }
-  .ab-stats-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-  }
-  @media (max-width: 640px) {
-    .ab-stats-grid { grid-template-columns: repeat(2, 1fr); }
-  }
+  .ab-stats-wrap { background: var(--ab-bg-1); border-bottom: 1px solid var(--ab-line); }
+  .ab-stats-grid { display: grid; grid-template-columns: repeat(4,1fr); }
+  @media (max-width: 640px) { .ab-stats-grid { grid-template-columns: repeat(2,1fr); } }
+
   .ab-stat-cell {
-    padding: 30px 20px;
-    text-align: center;
+    padding: 28px 20px; text-align: center;
     border-right: 1px solid var(--ab-line);
-    transition: background .2s;
-    cursor: default;
+    transition: background .2s; cursor: default;
   }
   .ab-stat-cell:last-child { border-right: none; }
   .ab-stat-cell:hover { background: var(--ab-bg-2); }
   @media (max-width: 640px) {
     .ab-stat-cell:nth-child(2) { border-right: none; }
     .ab-stat-cell:nth-child(3) { border-right: 1px solid var(--ab-line); }
-    .ab-stat-cell:nth-child(1),
-    .ab-stat-cell:nth-child(2) { border-bottom: 1px solid var(--ab-line); }
+    .ab-stat-cell:nth-child(1), .ab-stat-cell:nth-child(2) { border-bottom: 1px solid var(--ab-line); }
   }
   .ab-stat-icon {
     display: inline-flex; align-items: center; justify-content: center;
-    width: 40px; height: 40px;
-    border-radius: var(--ab-r-sm);
-    margin: 0 auto 12px;
-    transition: transform .2s;
+    width: 40px; height: 40px; border-radius: var(--ab-r-sm);
+    margin: 0 auto 12px; transition: transform .2s;
   }
   .ab-stat-cell:hover .ab-stat-icon { transform: scale(1.1) rotate(-4deg); }
   .ab-icon--indigo  { background: #eef2ff; color: #4f46e5; }
   .ab-icon--sky     { background: #f0f9ff; color: #0284c7; }
   .ab-icon--amber   { background: #fffbeb; color: #d97706; }
   .ab-icon--emerald { background: #f0fdf4; color: #059669; }
-  .ab-stat-val {
-    font-family: var(--ab-display);
-    font-size: clamp(28px, 3.5vw, 38px);
-    font-weight: 900;
-    color: var(--ab-ink-1);
-    line-height: 1; margin-bottom: 4px;
-  }
-  .ab-stat-lbl {
-    font-size: 12px; font-weight: 500;
-    color: var(--ab-ink-4);
-    text-transform: uppercase; letter-spacing: .05em;
-  }
+  .ab-stat-val { font-family: var(--ab-display); font-size: clamp(26px,3.2vw,36px); font-weight: 900; color: var(--ab-ink-1); line-height: 1; margin-bottom: 4px; }
+  .ab-stat-lbl { font-size: 12px; font-weight: 500; color: var(--ab-ink-4); text-transform: uppercase; letter-spacing: .05em; }
 
   /* ══════════════════════════════════════
      MISSION
   ══════════════════════════════════════ */
   .ab-mission-wrap { background: var(--ab-bg-1); }
-  .ab-mission-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: clamp(40px, 7vw, 88px);
-    align-items: center;
-  }
-  @media (max-width: 860px) {
-    .ab-mission-grid { grid-template-columns: 1fr; }
-  }
-  .ab-mission-p {
-    font-size: 15.5px; line-height: 1.8;
-    color: var(--ab-ink-3); margin-bottom: 14px;
-  }
-  .ab-bullets {
-    list-style: none;
-    margin: 24px 0 32px;
-    display: flex; flex-direction: column; gap: 11px;
-  }
-  .ab-bullet {
-    display: flex; align-items: flex-start; gap: 10px;
-    font-size: 14.5px; font-weight: 500; color: var(--ab-ink-2);
-  }
+  .ab-mission-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(36px,7vw,84px); align-items: center; }
+  @media (max-width: 860px) { .ab-mission-grid { grid-template-columns: 1fr; } }
+
+  .ab-mission-p { font-size: 15.5px; line-height: 1.8; color: var(--ab-ink-3); margin-bottom: 14px; }
+  .ab-bullets { list-style: none; margin: 22px 0 30px; display: flex; flex-direction: column; gap: 11px; }
+  .ab-bullet { display: flex; align-items: flex-start; gap: 10px; font-size: 14.5px; font-weight: 500; color: var(--ab-ink-2); }
   .ab-bullet svg { color: var(--ab-brand); flex-shrink: 0; margin-top: 2px; }
 
-  /* Staggered image mosaic */
-  .ab-mosaic {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
-  }
-  .ab-mosaic img {
-    width: 100%; border-radius: var(--ab-r-lg);
-    object-fit: cover; display: block;
-    box-shadow: var(--ab-sh-md);
-    transition: transform .35s ease, box-shadow .35s ease;
-  }
-  .ab-mosaic img:hover {
-    transform: scale(1.03) translateY(-4px);
-    box-shadow: var(--ab-sh-lg);
-  }
-  .ab-mosaic img:nth-child(1) { height: clamp(140px, 17vw, 195px); }
-  .ab-mosaic img:nth-child(2) { height: clamp(140px, 17vw, 195px); margin-top: 28px; }
-  .ab-mosaic img:nth-child(3) { height: clamp(140px, 17vw, 195px); margin-top: -28px; }
-  .ab-mosaic img:nth-child(4) { height: clamp(140px, 17vw, 195px); }
+  .ab-mosaic { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .ab-mosaic img { width: 100%; border-radius: var(--ab-r-lg); object-fit: cover; display: block; box-shadow: var(--ab-sh-md); transition: transform .35s ease, box-shadow .35s ease; }
+  .ab-mosaic img:hover { transform: scale(1.03) translateY(-4px); box-shadow: var(--ab-sh-lg); }
+  .ab-mosaic img:nth-child(1) { height: clamp(130px,16vw,185px); }
+  .ab-mosaic img:nth-child(2) { height: clamp(130px,16vw,185px); margin-top: 26px; }
+  .ab-mosaic img:nth-child(3) { height: clamp(130px,16vw,185px); margin-top: -26px; }
+  .ab-mosaic img:nth-child(4) { height: clamp(130px,16vw,185px); }
 
   /* ══════════════════════════════════════
      VALUES
   ══════════════════════════════════════ */
-  .ab-values-wrap {
-    background: var(--ab-bg-2);
-    border-top: 1px solid var(--ab-line);
-    border-bottom: 1px solid var(--ab-line);
-  }
-  .ab-val-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 18px;
-  }
-  @media (max-width: 900px) { .ab-val-grid { grid-template-columns: repeat(2, 1fr); } }
+  .ab-values-wrap { background: var(--ab-bg-2); border-top: 1px solid var(--ab-line); border-bottom: 1px solid var(--ab-line); }
+  .ab-val-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 18px; }
+  @media (max-width: 900px) { .ab-val-grid { grid-template-columns: repeat(2,1fr); } }
   @media (max-width: 480px) { .ab-val-grid { grid-template-columns: 1fr; } }
 
   .ab-val-card {
-    background: var(--ab-bg-1);
-    border: 1.5px solid var(--ab-line);
-    border-radius: var(--ab-r-lg);
-    padding: 28px 24px 30px;
-    position: relative; overflow: hidden;
+    background: var(--ab-bg-1); border: 1.5px solid var(--ab-line); border-radius: var(--ab-r-lg);
+    padding: 26px 22px 28px; position: relative; overflow: hidden;
     transition: box-shadow .25s, transform .25s, border-color .25s;
   }
-  .ab-val-card::after {
-    content: '';
-    position: absolute; top: 0; left: 0; right: 0;
-    height: 3px; opacity: 0;
-    transition: opacity .25s;
-    border-radius: 3px 3px 0 0;
-  }
-  .ab-val-card:hover {
-    box-shadow: var(--ab-sh-lg);
-    transform: translateY(-5px);
-    border-color: var(--ab-line-2);
-  }
+  .ab-val-card::after { content:''; position: absolute; top:0; left:0; right:0; height:3px; opacity:0; transition: opacity .25s; border-radius: 3px 3px 0 0; }
+  .ab-val-card:hover { box-shadow: var(--ab-sh-lg); transform: translateY(-5px); border-color: var(--ab-line-2); }
   .ab-val-card:hover::after { opacity: 1; }
 
-  .ab-val--rose  .ab-val-icon-wrap { background: #fff1f2; color: #e11d48; }
-  .ab-val--rose::after             { background: #e11d48; }
-  .ab-val--amber .ab-val-icon-wrap { background: #fffbeb; color: #d97706; }
-  .ab-val--amber::after            { background: #d97706; }
-  .ab-val--violet .ab-val-icon-wrap{ background: #f5f3ff; color: #7c3aed; }
-  .ab-val--violet::after           { background: #7c3aed; }
-  .ab-val--sky   .ab-val-icon-wrap { background: #f0f9ff; color: #0284c7; }
-  .ab-val--sky::after              { background: #0284c7; }
+  .ab-val--rose   .ab-val-icon-wrap { background: #fff1f2; color: #e11d48; }
+  .ab-val--rose::after              { background: #e11d48; }
+  .ab-val--amber  .ab-val-icon-wrap { background: #fffbeb; color: #d97706; }
+  .ab-val--amber::after             { background: #d97706; }
+  .ab-val--violet .ab-val-icon-wrap { background: #f5f3ff; color: #7c3aed; }
+  .ab-val--violet::after            { background: #7c3aed; }
+  .ab-val--sky    .ab-val-icon-wrap { background: #f0f9ff; color: #0284c7; }
+  .ab-val--sky::after               { background: #0284c7; }
 
-  .ab-val-icon-wrap {
-    display: inline-flex; align-items: center; justify-content: center;
-    width: 46px; height: 46px;
-    border-radius: var(--ab-r-sm);
-    margin-bottom: 18px;
-    transition: transform .22s;
-  }
+  .ab-val-icon-wrap { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: var(--ab-r-sm); margin-bottom: 16px; transition: transform .22s; }
   .ab-val-card:hover .ab-val-icon-wrap { transform: scale(1.12) rotate(-5deg); }
-  .ab-val-title {
-    font-size: 15px; font-weight: 700;
-    color: var(--ab-ink-1); margin-bottom: 8px; letter-spacing: -.01em;
-  }
-  .ab-val-desc { font-size: 13.5px; line-height: 1.7; color: var(--ab-ink-3); }
+  .ab-val-title { font-size: 15px; font-weight: 700; color: var(--ab-ink-1); margin-bottom: 8px; letter-spacing: -.01em; }
+  .ab-val-desc  { font-size: 13.5px; line-height: 1.7; color: var(--ab-ink-3); }
 
   /* ══════════════════════════════════════
      TEAM
   ══════════════════════════════════════ */
   .ab-team-wrap { background: var(--ab-bg-1); }
-  .ab-team-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 20px; margin-bottom: 44px;
-  }
-  @media (max-width: 860px) { .ab-team-grid { grid-template-columns: repeat(2, 1fr); } }
+  .ab-team-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 20px; margin-bottom: 44px; }
+  @media (max-width: 860px) { .ab-team-grid { grid-template-columns: repeat(2,1fr); } }
   @media (max-width: 420px) { .ab-team-grid { gap: 12px; } }
 
-  .ab-tutor-card {
-    background: var(--ab-bg-1);
-    border: 1.5px solid var(--ab-line);
-    border-radius: var(--ab-r-lg);
-    padding: 26px 20px 22px;
-    text-align: center;
-    transition: box-shadow .25s, transform .25s;
-    cursor: default;
-  }
-  .ab-tutor-card:hover {
-    box-shadow: var(--ab-sh-lg);
-    transform: translateY(-5px);
-  }
+  .ab-tutor-card { background: var(--ab-bg-1); border: 1.5px solid var(--ab-line); border-radius: var(--ab-r-lg); padding: 24px 18px 20px; text-align: center; transition: box-shadow .25s, transform .25s; cursor: default; }
+  .ab-tutor-card:hover { box-shadow: var(--ab-sh-lg); transform: translateY(-5px); }
   .ab-avatar-wrap { position: relative; display: inline-block; margin-bottom: 14px; }
-  .ab-avatar {
-    width: 72px; height: 72px; border-radius: 50%;
-    object-fit: cover; display: block;
-    border: 3px solid var(--ab-bg-1);
-    box-shadow: 0 0 0 2px var(--ab-line), var(--ab-sh-md);
-  }
-  .ab-avatar-dot {
-    position: absolute; bottom: 3px; right: 3px;
-    width: 16px; height: 16px;
-    background: #10b981;
-    border: 2.5px solid var(--ab-bg-1);
-    border-radius: 50%;
-  }
+  .ab-avatar { width: 72px; height: 72px; border-radius: 50%; object-fit: cover; display: block; border: 3px solid var(--ab-bg-1); box-shadow: 0 0 0 2px var(--ab-line), var(--ab-sh-md); }
+  .ab-avatar-dot { position: absolute; bottom: 3px; right: 3px; width: 16px; height: 16px; background: #10b981; border: 2.5px solid var(--ab-bg-1); border-radius: 50%; }
   .ab-tutor-name { font-size: 14px; font-weight: 700; color: var(--ab-ink-1); margin-bottom: 3px; }
   .ab-tutor-role { font-size: 12px; color: var(--ab-ink-4); font-weight: 500; margin-bottom: 16px; }
-  .ab-tutor-meta {
-    display: flex; align-items: center; justify-content: center; gap: 14px;
-    padding-top: 14px; border-top: 1px solid var(--ab-line);
-  }
+  .ab-tutor-meta { display: flex; align-items: center; justify-content: center; gap: 14px; padding-top: 14px; border-top: 1px solid var(--ab-line); }
   .ab-tutor-meta-col { display: flex; flex-direction: column; align-items: center; gap: 2px; }
   .ab-tutor-meta-val { font-size: 13px; font-weight: 700; color: var(--ab-ink-1); }
-  .ab-tutor-meta-key {
-    font-size: 10px; font-weight: 600; color: var(--ab-ink-4);
-    text-transform: uppercase; letter-spacing: .06em;
-  }
+  .ab-tutor-meta-key { font-size: 10px; font-weight: 600; color: var(--ab-ink-4); text-transform: uppercase; letter-spacing: .06em; }
   .ab-tutor-meta-sep { width: 1px; height: 28px; background: var(--ab-line); }
   .ab-team-cta { text-align: center; }
 
   /* ══════════════════════════════════════
      TESTIMONIALS
   ══════════════════════════════════════ */
-  .ab-testi-wrap {
-    background: var(--ab-bg-3);
-    border-top: 1px solid var(--ab-line);
-    border-bottom: 1px solid var(--ab-line);
-  }
-  .ab-testi-grid {
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
-  }
-  @media (max-width: 820px) {
-    .ab-testi-grid { grid-template-columns: 1fr; max-width: 520px; margin: 0 auto; }
-  }
-  .ab-testi-card {
-    background: var(--ab-bg-1);
-    border: 1.5px solid var(--ab-line);
-    border-radius: var(--ab-r-lg);
-    padding: 28px 26px;
-    display: flex; flex-direction: column;
-    transition: box-shadow .25s, transform .25s;
-  }
+  .ab-testi-wrap { background: var(--ab-bg-3); border-top: 1px solid var(--ab-line); border-bottom: 1px solid var(--ab-line); }
+  .ab-testi-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+  @media (max-width: 820px) { .ab-testi-grid { grid-template-columns: 1fr; max-width: 520px; margin: 0 auto; } }
+
+  .ab-testi-card { background: var(--ab-bg-1); border: 1.5px solid var(--ab-line); border-radius: var(--ab-r-lg); padding: 26px 24px; display: flex; flex-direction: column; transition: box-shadow .25s, transform .25s; }
   .ab-testi-card:hover { box-shadow: var(--ab-sh-md); transform: translateY(-3px); }
   .ab-testi-stars { display: flex; gap: 3px; color: #f59e0b; margin-bottom: 12px; }
-  .ab-testi-icon  { color: var(--ab-brand); margin-bottom: 14px; }
-  .ab-testi-text {
-    font-size: 14.5px; line-height: 1.75;
-    color: var(--ab-ink-2); font-style: italic;
-    flex: 1; margin-bottom: 22px;
-  }
-  .ab-testi-author {
-    display: flex; align-items: center; gap: 10px;
-    padding-top: 18px; border-top: 1px solid var(--ab-line);
-  }
-  .ab-testi-av {
-    width: 40px; height: 40px; border-radius: 50%;
-    object-fit: cover; flex-shrink: 0;
-    border: 2px solid var(--ab-line);
-  }
+  .ab-testi-icon  { color: var(--ab-brand); margin-bottom: 12px; }
+  .ab-testi-text  { font-size: 14.5px; line-height: 1.75; color: var(--ab-ink-2); font-style: italic; flex: 1; margin-bottom: 20px; }
+  .ab-testi-author { display: flex; align-items: center; gap: 10px; padding-top: 16px; border-top: 1px solid var(--ab-line); }
+  .ab-testi-av   { width: 38px; height: 38px; border-radius: 50%; object-fit: cover; flex-shrink: 0; border: 2px solid var(--ab-line); }
   .ab-testi-name { font-size: 13px; font-weight: 700; color: var(--ab-ink-1); margin-bottom: 2px; }
   .ab-testi-sub  { font-size: 11.5px; color: var(--ab-ink-4); }
 
@@ -591,38 +396,61 @@ const STYLES = `
     position: relative; overflow: hidden;
     border-top: 1px solid var(--ab-line);
     color: #fff;
+    /* min-height keeps the section substantial even without a video */
+    min-height: 540px;
+    display: flex; align-items: center;
   }
+
+  /* ── Video element
+        autoPlay + muted + playsInline = cross-browser silent autoplay.
+        The poster shows while the video loads (or if the src is missing).
+        WebM is served first (smaller, better quality); MP4 is the Safari fallback.
+        Drop your files in /public/videos/ and update the <source> src values below.
+  ── */
   .ab-cta-video {
     position: absolute; inset: 0;
     width: 100%; height: 100%;
-    object-fit: cover; z-index: 0;
+    object-fit: cover;
+    z-index: 0;
   }
+
+  /* ── Layered dark overlay — keeps text readable over any video ── */
   .ab-cta-overlay {
     position: absolute; inset: 0; z-index: 1;
-    background: linear-gradient(140deg,
-      rgba(12,10,9,.90) 0%, rgba(28,10,0,.78) 48%, rgba(12,10,9,.85) 100%);
+    background: linear-gradient(
+      135deg,
+      rgba(12,10,9,.88) 0%,
+      rgba(30,12,0,.76) 48%,
+      rgba(12,10,9,.84) 100%
+    );
   }
+  /* Brand colour radial wash on top of the dark overlay */
   .ab-cta-overlay::after {
     content: ''; position: absolute; inset: 0;
-    background: radial-gradient(ellipse 78% 68% at 58% 50%, rgba(249,115,22,.20) 0%, transparent 62%);
+    background: radial-gradient(ellipse 80% 70% at 60% 52%, rgba(249,115,22,.20) 0%, transparent 62%);
   }
-  .ab-cta-orb {
-    position: absolute; z-index: 2; border-radius: 50%; pointer-events: none;
-  }
+
+  /* ── Decorative glow orbs (z-index above overlay, below content) ── */
+  .ab-cta-orb { position: absolute; z-index: 2; border-radius: 50%; pointer-events: none; }
   .ab-cta-orb-1 {
-    width: 500px; height: 500px; top: -150px; left: -130px;
-    background: radial-gradient(circle, rgba(249,115,22,.16) 0%, transparent 70%);
+    width: 520px; height: 520px; top: -160px; left: -140px;
+    background: radial-gradient(circle, rgba(249,115,22,.15) 0%, transparent 70%);
   }
   .ab-cta-orb-2 {
-    width: 380px; height: 380px; bottom: -110px; right: -90px;
-    background: radial-gradient(circle, rgba(251,191,36,.13) 0%, transparent 70%);
+    width: 400px; height: 400px; bottom: -120px; right: -100px;
+    background: radial-gradient(circle, rgba(251,191,36,.12) 0%, transparent 70%);
   }
+
+  /* ── Content (sits above everything) ── */
   .ab-cta-inner {
     position: relative; z-index: 3;
-    padding: clamp(80px, 11vw, 128px) var(--ab-px);
+    width: 100%;
+    padding: clamp(72px, 10vw, 120px) var(--ab-px);
     text-align: center;
     max-width: var(--ab-max); margin: 0 auto;
   }
+
+  /* Animated live badge */
   .ab-cta-badge {
     display: inline-flex; align-items: center; gap: 8px;
     background: rgba(255,255,255,.12);
@@ -631,58 +459,69 @@ const STYLES = `
     border-radius: 100px; padding: 6px 16px;
     font-size: 11px; font-weight: 700;
     letter-spacing: .07em; text-transform: uppercase;
-    margin-bottom: 24px; backdrop-filter: blur(10px);
+    margin-bottom: 22px; backdrop-filter: blur(10px);
   }
   .ab-cta-dot {
     width: 7px; height: 7px; border-radius: 50%; background: #34d399;
     animation: ab-pulse 2.2s ease-in-out infinite;
   }
   @keyframes ab-pulse {
-    0%,100% { opacity: 1; transform: scale(1); }
-    50%      { opacity: .55; transform: scale(.75); }
+    0%,100% { opacity: 1;   transform: scale(1);   }
+    50%      { opacity: .5; transform: scale(.72); }
   }
+
+  /* CTA heading */
   .ab-cta-title {
     font-family: var(--ab-display);
-    font-size: clamp(36px, 6.5vw, 68px);
+    font-size: clamp(34px, 6vw, 66px);
     font-weight: 900; line-height: 1.05; letter-spacing: -.025em;
     color: #fff; margin-bottom: 18px;
   }
   .ab-cta-title em { font-style: italic; color: #fb923c; }
+
+  /* CTA body copy */
   .ab-cta-desc {
-    font-size: clamp(15px, 2vw, 18px); line-height: 1.72;
+    font-size: clamp(15px, 1.8vw, 18px); line-height: 1.72;
     color: rgba(255,255,255,.62);
-    max-width: 480px; margin: 0 auto 40px;
+    max-width: 480px; margin: 0 auto 38px;
   }
+
+  /* CTA button row */
   .ab-cta-btns {
     display: flex; flex-wrap: wrap;
     align-items: center; justify-content: center;
-    gap: 12px; margin-bottom: 52px;
+    gap: 12px; margin-bottom: 48px;
   }
+
+  /* Trust row */
   .ab-cta-trust {
     display: flex; flex-wrap: wrap;
     align-items: center; justify-content: center;
     gap: 8px 28px;
-    padding-top: 32px; border-top: 1px solid rgba(255,255,255,.12);
+    padding-top: 28px;
+    border-top: 1px solid rgba(255,255,255,.13);
   }
   .ab-cta-trust-item {
     display: flex; align-items: center; gap: 7px;
-    font-size: 13px; font-weight: 500; color: rgba(255,255,255,.62);
+    font-size: 13px; font-weight: 500; color: rgba(255,255,255,.60);
   }
   .ab-cta-trust-item svg { flex-shrink: 0; }
   .ab-cta-trust-sep { width: 1px; height: 14px; background: rgba(255,255,255,.2); }
+
+  /* Dev hint — shows where to drop the video file */
   .ab-cta-hint {
     display: inline-flex; align-items: center; gap: 7px;
-    margin-top: 22px; font-size: 11.5px;
-    color: rgba(255,255,255,.28); font-weight: 500;
-  }
-  @media (max-width: 500px) {
-    .ab-cta-trust-sep { display: none; }
-    .ab-cta-trust { gap: 10px 16px; }
+    margin-top: 24px; font-size: 11px;
+    color: rgba(255,255,255,.25); font-weight: 500;
   }
 
   /* ══════════════════════════════════════
-     MOBILE BUTTON STACK
+     RESPONSIVE
   ══════════════════════════════════════ */
+  @media (max-width: 500px) {
+    .ab-cta-trust-sep  { display: none; }
+    .ab-cta-trust      { gap: 10px 14px; }
+  }
   @media (max-width: 480px) {
     .ab-hero-btns, .ab-cta-btns { flex-direction: column; align-items: stretch; }
     .ab-btn, .ab-btn-ghost,
@@ -691,12 +530,12 @@ const STYLES = `
 `;
 
 /* ─────────────────────────────────────────
-   PAGE COMPONENT
+   PAGE
 ───────────────────────────────────────── */
 export default function AboutPage() {
   return (
     <>
-      {/* Fonts scoped to this page — loaded via <Head> not @import */}
+      {/* Fonts loaded via <Head> — scoped to this page only */}
       <Head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
@@ -706,48 +545,56 @@ export default function AboutPage() {
         />
       </Head>
 
-      {/* All CSS lives under .ab-root — zero bleed to other pages */}
+      {/* All CSS under .ab-root — zero bleed to other pages */}
       <style>{STYLES}</style>
 
       <div className="ab-root">
         <Navbar />
 
-        {/* ══════════ HERO ══════════ */}
+        {/* ══════════════════════════════════════
+            HERO — compact / standard size
+            Two-column: headline + description
+            on the left, 4 key stat cards on the right.
+        ══════════════════════════════════════ */}
         <section className="ab-hero">
-          <div className="ab-hero-mesh" />
-          <div className="ab-hero-dots" />
-          <div className="ab-hero-body">
-            <div className="ab-pill">
-              <GraduationCap size={11} /> Our Story
+          <div className="ab-hero-wash" />
+          <div className="ab-hero-accent" />
+
+          <div className="ab-hero-inner">
+            {/* Left column */}
+            <div className="ab-hero-text">
+              <div className="ab-pill">
+                <GraduationCap size={11} /> About SkillBridge
+              </div>
+              <h1 className="ab-h1">
+                Learning,&nbsp;<em>Reimagined.</em>
+              </h1>
+              <p className="ab-hero-desc">
+                SkillBridge connects passionate learners with world-class tutors.
+                Accessible, personal, and flexible education — for everyone, everywhere.
+              </p>
+              <div className="ab-hero-btns">
+                <Link href="/tutors"   className="ab-btn">Find a Tutor <ArrowRight size={14} /></Link>
+                <Link href="/register" className="ab-btn-ghost">Become a Tutor</Link>
+              </div>
             </div>
-            <h1 className="ab-h1">
-              Learning,<br /><em>Reimagined.</em>
-            </h1>
-            <p className="ab-hero-desc">
-              SkillBridge connects passionate learners with world-class tutors.
-              We believe great education should be accessible, personal, and flexible — for everyone, everywhere.
-            </p>
-            <div className="ab-hero-btns">
-              <Link href="/tutors" className="ab-btn">
-                Find a Tutor <ArrowRight size={15} />
-              </Link>
-              <Link href="/register" className="ab-btn-ghost">
-                Become a Tutor
-              </Link>
-            </div>
-            <div className="ab-trust">
-              <span className="ab-trust-item"><CheckCircle2 size={13} /> No commitment needed</span>
-              <span className="ab-trust-sep" />
-              <span className="ab-trust-item"><Star size={13} /> 4.8 average rating</span>
-              <span className="ab-trust-sep" />
-              <span className="ab-trust-item"><Zap size={13} /> Book in under 2 minutes</span>
-              <span className="ab-trust-sep" />
-              <span className="ab-trust-item"><Shield size={13} /> Money-back guarantee</span>
+
+            {/* Right column — mini stat cards */}
+            <div className="ab-hero-aside">
+              {STATS.map(({ label, value, icon: Icon, cls }) => (
+                <div key={label} className="ab-hero-stat">
+                  <div className={`ab-hero-stat-icon ${cls}`}><Icon size={16} /></div>
+                  <div className="ab-hero-stat-body">
+                    <div className="ab-hero-stat-val">{value}</div>
+                    <div className="ab-hero-stat-lbl">{label}</div>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </section>
 
-        {/* ══════════ STATS ══════════ */}
+        {/* ══════════ STATS BAR ══════════ */}
         <section className="ab-stats-wrap">
           <div className="ab-inner">
             <div className="ab-stats-grid">
@@ -766,32 +613,25 @@ export default function AboutPage() {
         <section className="ab-mission-wrap ab-py">
           <div className="ab-inner">
             <div className="ab-mission-grid">
-              {/* Text */}
               <div>
                 <div className="ab-pill"><BookOpen size={11} /> Why We Exist</div>
                 <h2 className="ab-h2">Our <em>Mission</em></h2>
                 <p className="ab-mission-p">
-                  We started SkillBridge with a simple belief — everyone deserves access to a great
-                  teacher. Whether you're struggling with algebra, learning a new language, or picking
-                  up the guitar, the right tutor changes everything.
+                  We started SkillBridge with a simple belief — everyone deserves access to a great teacher.
+                  Whether you're struggling with algebra, learning a new language, or picking up the guitar,
+                  the right tutor changes everything.
                 </p>
                 <p className="ab-mission-p">
-                  Our platform makes it effortless to find, vet, and book expert tutors across every
-                  subject imaginable — with verified reviews and same-day availability.
+                  Our platform makes it effortless to find, vet, and book expert tutors across every subject
+                  imaginable — with verified reviews and same-day availability.
                 </p>
                 <ul className="ab-bullets">
                   {MISSION_BULLETS.map((b) => (
-                    <li key={b} className="ab-bullet">
-                      <CheckCircle2 size={15} /> {b}
-                    </li>
+                    <li key={b} className="ab-bullet"><CheckCircle2 size={15} /> {b}</li>
                   ))}
                 </ul>
-                <Link href="/tutors" className="ab-btn">
-                  Browse All Tutors <ArrowRight size={15} />
-                </Link>
+                <Link href="/tutors" className="ab-btn">Browse All Tutors <ArrowRight size={14} /></Link>
               </div>
-
-              {/* Staggered mosaic */}
               <div className="ab-mosaic">
                 <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=420&h=270&fit=crop" alt="Students collaborating" />
                 <img src="https://images.unsplash.com/photo-1509228468518-180dd4864904?w=420&h=270&fit=crop" alt="Mathematics"            />
@@ -854,9 +694,7 @@ export default function AboutPage() {
               ))}
             </div>
             <div className="ab-team-cta">
-              <Link href="/tutors" className="ab-btn">
-                View All Tutors <ArrowRight size={15} />
-              </Link>
+              <Link href="/tutors" className="ab-btn">View All Tutors <ArrowRight size={14} /></Link>
             </div>
           </div>
         </section>
@@ -890,35 +728,55 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* ══════════ CTA — VIDEO BACKGROUND ══════════ */}
-        <section className="ab-cta-wrap">
-          {/*
-            ─── Video background ────────────────────────────────────────
-            Replace with your own file once ready:
-              <source src="/videos/cta-bg.webm" type="video/webm" />
-              <source src="/videos/cta-bg.mp4"  type="video/mp4"  />
+        {/* ══════════════════════════════════════
+            CTA — VIDEO BACKGROUND
+            ──────────────────────────────────────
+            HOW TO ADD YOUR VIDEO:
+            1. Export your video as both .webm and .mp4
+               (HandBrake, Adobe Media Encoder, or ffmpeg work great)
+            2. Drop both files into  /public/videos/
+                 /public/videos/cta-bg.webm
+                 /public/videos/cta-bg.mp4
+            3. Next.js serves /public/** as static assets automatically —
+               no import needed.
+            4. The <source> tags below are already pointing to those paths.
+               Just drop the files in and you're done.
 
-            Drop the files in /public/videos/ — Next.js serves them as-is.
-
-            Free stock video (search "students studying" / "learning"):
-              https://www.pexels.com/videos
+            FREE STOCK VIDEO (no attribution required):
+              https://www.pexels.com/videos       – search "students studying"
               https://mixkit.co/free-stock-video/education
               https://pixabay.com/videos
-            ─────────────────────────────────────────────────────────── */}
+
+            POSTER IMAGE (shown while video loads / on slow connections):
+              Currently uses an Unsplash image. Replace with your own:
+              poster="/images/cta-poster.jpg"
+            ══════════════════════════════════════ */}
+        <section className="ab-cta-wrap">
+
+          {/* ── Video ── */}
           <video
             className="ab-cta-video"
-            autoPlay loop muted playsInline
-            poster="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1600&h=720&fit=crop"
+            autoPlay
+            loop
+            muted
+            playsInline
+            poster="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1600&h=720&fit=crop&q=80"
           >
+            {/* WebM first — better compression, most modern browsers */}
             <source src="/videos/cta-bg.webm" type="video/webm" />
+            {/* MP4 fallback — required for Safari */}
             <source src="/videos/cta-bg.mp4"  type="video/mp4"  />
           </video>
 
+          {/* ── Overlay layers ── */}
           <div className="ab-cta-overlay" />
           <div className="ab-cta-orb ab-cta-orb-1" />
           <div className="ab-cta-orb ab-cta-orb-2" />
 
+          {/* ── Content ── */}
           <div className="ab-cta-inner">
+
+            {/* Animated live badge */}
             <div className="ab-cta-badge">
               <span className="ab-cta-dot" />
               1,200+ sessions booked this month
@@ -933,6 +791,7 @@ export default function AboutPage() {
               Your first session is completely risk-free.
             </p>
 
+            {/* Buttons */}
             <div className="ab-cta-btns">
               <Link href="/register" className="ab-btn-white">
                 Get Started Free <ArrowRight size={15} />
@@ -942,28 +801,30 @@ export default function AboutPage() {
               </Link>
             </div>
 
+            {/* 4-item trust row */}
             <div className="ab-cta-trust">
               <span className="ab-cta-trust-item">
-                <Star size={13} color="#f59e0b" fill="#f59e0b" /> 4.8 average rating
+                <Star    size={13} color="#f59e0b" fill="#f59e0b" /> 4.8 average rating
               </span>
               <span className="ab-cta-trust-sep" />
               <span className="ab-cta-trust-item">
-                <Users size={13} color="#38bdf8" /> 50+ verified tutors
+                <Users   size={13} color="#38bdf8" /> 50+ verified tutors
               </span>
               <span className="ab-cta-trust-sep" />
               <span className="ab-cta-trust-item">
-                <Zap size={13} color="#34d399" /> Book in under 2 min
+                <Zap     size={13} color="#34d399" /> Book in under 2 min
               </span>
               <span className="ab-cta-trust-sep" />
               <span className="ab-cta-trust-item">
-                <Shield size={13} color="#a78bfa" /> Money-back guarantee
+                <Shield  size={13} color="#a78bfa" /> Money-back guarantee
               </span>
             </div>
 
+            {/* Dev hint — remove in production */}
             <p className="ab-cta-hint">
-              <Play size={12} />
-              Background video — drop your file into /public/videos/cta-bg.mp4
+              <Play size={12} /> Add your video → /public/videos/cta-bg.mp4
             </p>
+
           </div>
         </section>
 
