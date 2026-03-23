@@ -3,6 +3,7 @@ import { Search, Star, Users, BookOpen, ArrowRight, Sparkles, Zap } from "lucide
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import HeroIllustration from "@/components/HeroIllustration";
+import VideoSection from "@/components/Videosection";
 
 // ─── Data ────────────────────────────────────────────────────────────────────
 
@@ -150,19 +151,15 @@ export default function HomePage() {
           align-items: center;
         }
 
-        /* Tablet: stack hero, hide illustration */
         @media (max-width: 960px) {
           .hero { padding: 64px 20px 56px; }
           .hero-inner { grid-template-columns: 1fr; gap: 0; }
           .hero-illustration { display: none; }
         }
-
-        /* Mobile */
         @media (max-width: 600px) {
           .hero { padding: 48px 16px 44px; }
         }
 
-        /* Badge */
         .hero-badge {
           display: inline-flex;
           align-items: center;
@@ -178,7 +175,6 @@ export default function HomePage() {
         }
         .hero-badge-star { color: var(--orange); font-size: 12px; }
 
-        /* Heading */
         .hero h1 {
           font-family: 'Lexend', sans-serif;
           font-size: clamp(36px, 5.5vw, 66px);
@@ -198,7 +194,6 @@ export default function HomePage() {
           margin-bottom: 36px;
         }
 
-        /* CTA buttons */
         .hero-ctas {
           display: flex;
           gap: 12px;
@@ -210,7 +205,6 @@ export default function HomePage() {
           .hero-ctas .btn { width: 100%; justify-content: center; }
         }
 
-        /* Trust strip */
         .trust-row {
           display: flex;
           flex-wrap: wrap;
@@ -234,7 +228,6 @@ export default function HomePage() {
           flex-shrink: 0;
         }
 
-        /* Illustration wrapper */
         .hero-illustration {
           display: flex;
           align-items: center;
@@ -280,13 +273,73 @@ export default function HomePage() {
         }
 
         /* ════════════════════════════════════════════
-           STATS BAND
+           STATS BAND — with background video
         ════════════════════════════════════════════ */
         .stats-band {
+          position: relative;
+          padding: 56px 24px;
+          overflow: hidden;
           background: var(--dark);
-          padding: 36px 24px;
+          isolation: isolate;
         }
+
+        /* The video itself — muted, autoplay, looping */
+        .stats-band-video {
+          position: absolute;
+          inset: 0;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          object-position: center;
+          z-index: -2;
+          pointer-events: none;
+          /* Slight desaturate so it doesn't fight the content */
+          filter: saturate(0.6) brightness(0.55);
+        }
+
+        /* Multi-layer overlay: dark + directional orange tint */
+        .stats-band-overlay {
+          position: absolute;
+          inset: 0;
+          z-index: -1;
+          background:
+            linear-gradient(
+              135deg,
+              rgba(10,10,10,.78)   0%,
+              rgba(20,20,20,.65)  50%,
+              rgba(194,65,12,.22) 100%
+            );
+          pointer-events: none;
+        }
+
+        /* Top-edge orange accent line */
+        .stats-band-glow {
+          position: absolute;
+          top: 0; left: 0; right: 0;
+          height: 2px;
+          background: linear-gradient(90deg,
+            transparent 0%,
+            var(--orange) 30%,
+            #fb923c 60%,
+            transparent 100%
+          );
+          z-index: 1;
+          pointer-events: none;
+        }
+
+        /* Bottom-edge subtle fade */
+        .stats-band-fade {
+          position: absolute;
+          bottom: 0; left: 0; right: 0;
+          height: 40px;
+          background: linear-gradient(to top, rgba(10,10,10,.45), transparent);
+          z-index: 1;
+          pointer-events: none;
+        }
+
         .stats-inner {
+          position: relative;
+          z-index: 2;
           max-width: 1140px;
           margin: 0 auto;
           display: grid;
@@ -294,27 +347,44 @@ export default function HomePage() {
           gap: 16px;
         }
         @media (max-width: 500px) {
-          .stats-inner { grid-template-columns: 1fr; gap: 24px; }
+          .stats-inner { grid-template-columns: 1fr; gap: 28px; }
         }
-        .stat-item { text-align: center; }
+
+        /* Dividers between stat columns on desktop */
+        @media (min-width: 501px) {
+          .stat-item:not(:last-child) {
+            border-right: 1px solid rgba(255,255,255,.08);
+          }
+        }
+
+        .stat-item { text-align: center; padding: 0 16px; }
+
         .stat-icon-wrap {
-          width: 36px; height: 36px;
-          background: rgba(234,88,12,.15);
-          border-radius: 10px;
+          width: 42px; height: 42px;
+          background: rgba(234,88,12,.16);
+          border: 1px solid rgba(234,88,12,.3);
+          border-radius: 13px;
           display: flex; align-items: center; justify-content: center;
-          margin: 0 auto 10px;
+          margin: 0 auto 12px;
           color: #fb923c;
+          /* Frosted glass feel */
+          backdrop-filter: blur(6px);
+          -webkit-backdrop-filter: blur(6px);
         }
         .stat-value {
-          font-size: 28px;
+          font-size: clamp(26px, 4vw, 34px);
           font-weight: 800;
           color: #fff;
-          letter-spacing: -.015em;
+          letter-spacing: -.02em;
+          line-height: 1;
         }
         .stat-label {
-          font-size: 12px;
-          color: rgba(255,255,255,.38);
-          margin-top: 4px;
+          font-size: 11px;
+          font-weight: 600;
+          color: rgba(255,255,255,.4);
+          margin-top: 6px;
+          letter-spacing: .08em;
+          text-transform: uppercase;
         }
 
         /* ════════════════════════════════════════════
@@ -655,17 +725,42 @@ export default function HomePage() {
 
         {/* ── STATS BAND ────────────────────────────────────────────────────── */}
         <section className="stats-band">
+
+
+          <video
+            className="stats-band-video"
+            src="https://videos.pexels.com/video-files/3195394/3195394-uhd_2560_1440_25fps.mp4"
+            autoPlay
+            loop
+            muted
+            playsInline
+            aria-hidden="true"
+            /* Preload metadata only — avoids blocking page load */
+            preload="metadata"
+          />
+
+          {/* Dark + orange gradient overlay */}
+          <div className="stats-band-overlay" aria-hidden="true" />
+
+          {/* Top orange accent line */}
+          <div className="stats-band-glow" aria-hidden="true" />
+
+          {/* Bottom fade */}
+          <div className="stats-band-fade" aria-hidden="true" />
+
+          {/* Stats content */}
           <div className="stats-inner">
             {FEATURED_STATS.map(({ label, value, icon: Icon }) => (
               <div key={label} className="stat-item">
                 <div className="stat-icon-wrap">
-                  <Icon size={17} />
+                  <Icon size={18} />
                 </div>
                 <p className="stat-value">{value}</p>
                 <p className="stat-label">{label}</p>
               </div>
             ))}
           </div>
+
         </section>
 
         {/* ── CATEGORIES ────────────────────────────────────────────────────── */}
@@ -741,6 +836,9 @@ export default function HomePage() {
             </div>
           </div>
         </section>
+
+        {/* ── VIDEO SECTION ─────────────────────────────────────────────── */}
+        <VideoSection />
 
         {/* ── CTA ───────────────────────────────────────────────────────────── */}
         <section className="cta-section">
