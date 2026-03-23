@@ -19,10 +19,10 @@ const STATS = [
 ];
 
 const VALUES = [
-  { icon: Heart,  title: "Student-First",  desc: "Every decision we make puts the learner at the center. Your growth is our mission.",          cls: "ab-val--rose"   },
-  { icon: Star,   title: "Quality Tutors", desc: "Every tutor is verified and reviewed. We only work with the best educators.",                  cls: "ab-val--amber"  },
-  { icon: Zap,    title: "Book Instantly", desc: "No waiting, no back-and-forth. Find your tutor and book a session in minutes.",                cls: "ab-val--violet" },
-  { icon: Target, title: "Any Subject",    desc: "From Calculus to Guitar, from Spanish to UI/UX — we cover it all.",                           cls: "ab-val--sky"    },
+  { icon: Heart,  title: "Student-First",  desc: "Every decision we make puts the learner at the center. Your growth is our mission.",    cls: "ab-val--rose"   },
+  { icon: Star,   title: "Quality Tutors", desc: "Every tutor is verified and reviewed. We only work with the best educators.",            cls: "ab-val--amber"  },
+  { icon: Zap,    title: "Book Instantly", desc: "No waiting, no back-and-forth. Find your tutor and book a session in minutes.",          cls: "ab-val--violet" },
+  { icon: Target, title: "Any Subject",    desc: "From Calculus to Guitar, from Spanish to UI/UX — we cover it all.",                     cls: "ab-val--sky"    },
 ];
 
 const TEAM = [
@@ -54,50 +54,54 @@ const TESTIMONIALS = [
   },
 ];
 
+/*
+  ─────────────────────────────────────────────────────────────────
+  CTA VIDEO — public CDN links (no download / hosting needed)
+
+  Using Mixkit free stock videos (CC0 license, no attribution):
+    Primary  : students studying at a desk
+    Fallback : classroom / learning scene
+
+  These URLs stream directly from Mixkit's CDN. Works in all
+  browsers including Safari (MP4 source).
+  ─────────────────────────────────────────────────────────────────
+*/
+const CTA_VIDEO_MP4_PRIMARY  = "https://assets.mixkit.co/videos/preview/mixkit-students-studying-in-a-library-4k-40090-large.mp4";
+const CTA_VIDEO_MP4_FALLBACK = "https://assets.mixkit.co/videos/preview/mixkit-girl-studying-on-her-laptop-at-home-18675-large.mp4";
+const CTA_POSTER             = "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1600&h=720&fit=crop&q=80";
+
 /* ─────────────────────────────────────────
    STYLES  (fully scoped under .ab-root)
 ───────────────────────────────────────── */
 const STYLES = `
-  /* ══════════════════════════════════════
-     TOKENS
-  ══════════════════════════════════════ */
   .ab-root {
     --ab-body:    'Plus Jakarta Sans', system-ui, sans-serif;
     --ab-display: 'Fraunces', Georgia, serif;
-
     --ab-brand:        #f97316;
     --ab-brand-deep:   #ea580c;
     --ab-brand-light:  #fff7ed;
     --ab-brand-border: #fed7aa;
-
     --ab-ink-1: #0c0a09;
     --ab-ink-2: #44403c;
     --ab-ink-3: #78716c;
     --ab-ink-4: #a8a29e;
-
     --ab-bg-1:  #ffffff;
     --ab-bg-2:  #faf9f7;
     --ab-bg-3:  #f5f3ef;
     --ab-line:  #e8e4de;
     --ab-line-2:#d6d0c8;
-
     --ab-r-sm: 8px;
     --ab-r-md: 14px;
     --ab-r-lg: 22px;
-
     --ab-sh-sm:    0 1px 3px rgba(0,0,0,.06), 0 1px 2px rgba(0,0,0,.04);
     --ab-sh-md:    0 4px 16px rgba(0,0,0,.08), 0 1px 4px rgba(0,0,0,.04);
     --ab-sh-lg:    0 20px 48px rgba(0,0,0,.10), 0 4px 12px rgba(0,0,0,.06);
     --ab-sh-brand: 0 8px 28px rgba(249,115,22,.28);
-
     --ab-max: 1160px;
     --ab-px:  clamp(20px, 5vw, 48px);
     --ab-py:  clamp(60px, 8vw, 104px);
   }
 
-  /* ══════════════════════════════════════
-     BASE RESET  (scoped — no bleed)
-  ══════════════════════════════════════ */
   .ab-root, .ab-root * { box-sizing: border-box; }
   .ab-root {
     font-family: var(--ab-body);
@@ -109,9 +113,6 @@ const STYLES = `
     flex-direction: column;
   }
 
-  /* ══════════════════════════════════════
-     LAYOUT
-  ══════════════════════════════════════ */
   .ab-inner {
     max-width: var(--ab-max);
     margin: 0 auto;
@@ -120,24 +121,15 @@ const STYLES = `
   }
   .ab-py { padding-top: var(--ab-py); padding-bottom: var(--ab-py); }
 
-  /* ══════════════════════════════════════
-     ATOMS
-  ══════════════════════════════════════ */
-
-  /* Eyebrow pill */
+  /* ── ATOMS ── */
   .ab-pill {
     display: inline-flex; align-items: center; gap: 6px;
-    background: var(--ab-brand-light);
-    color: var(--ab-brand-deep);
-    border: 1px solid var(--ab-brand-border);
-    border-radius: 100px;
-    padding: 4px 13px;
-    font-size: 11px; font-weight: 700;
-    letter-spacing: .07em; text-transform: uppercase;
-    margin-bottom: 14px;
+    background: var(--ab-brand-light); color: var(--ab-brand-deep);
+    border: 1px solid var(--ab-brand-border); border-radius: 100px;
+    padding: 4px 13px; font-size: 11px; font-weight: 700;
+    letter-spacing: .07em; text-transform: uppercase; margin-bottom: 14px;
   }
 
-  /* Headings */
   .ab-h1 {
     font-family: var(--ab-display);
     font-size: clamp(30px, 4.5vw, 52px);
@@ -154,11 +146,10 @@ const STYLES = `
   }
   .ab-h2 em { font-style: italic; color: var(--ab-brand); }
 
-  /* Section header block */
   .ab-sec-head { text-align: center; margin-bottom: clamp(32px, 5vw, 56px); }
   .ab-sec-sub  { font-size: 15px; color: var(--ab-ink-4); margin-top: 6px; }
 
-  /* ── Buttons ── */
+  /* ── BUTTONS ── */
   .ab-btn, .ab-btn-ghost, .ab-btn-white, .ab-btn-outline-white {
     display: inline-flex; align-items: center; gap: 8px;
     border-radius: var(--ab-r-md); padding: 12px 22px;
@@ -182,87 +173,64 @@ const STYLES = `
   }
   .ab-btn-outline-white:hover { background: rgba(255,255,255,.2); border-color: rgba(255,255,255,.5); transform: translateY(-2px); }
 
-
   /* ══════════════════════════════════════
-     HERO  — compact / standard size
+     HERO — compact two-column
   ══════════════════════════════════════ */
   .ab-hero {
     position: relative; overflow: hidden;
     background: var(--ab-bg-2);
     border-bottom: 1px solid var(--ab-line);
-    /* ↓ tight vertical padding for a "standard" header feel */
     padding: clamp(48px, 7vw, 80px) var(--ab-px) clamp(44px, 6vw, 72px);
   }
-
-  /* Subtle warm gradient wash — not overwhelming */
   .ab-hero-wash {
     position: absolute; inset: 0; pointer-events: none;
     background:
-      radial-gradient(ellipse 60% 100% at 0% 50%,   rgba(249,115,22,.08) 0%, transparent 55%),
-      radial-gradient(ellipse 50% 80%  at 100% 50%,  rgba(251,191,36,.07) 0%, transparent 55%);
+      radial-gradient(ellipse 60% 100% at 0% 50%,  rgba(249,115,22,.08) 0%, transparent 55%),
+      radial-gradient(ellipse 50% 80%  at 100% 50%, rgba(251,191,36,.07) 0%, transparent 55%);
   }
-
-  /* Thin horizontal rule accent */
   .ab-hero-accent {
-    position: absolute; bottom: 0; left: 0; right: 0;
-    height: 2px; pointer-events: none;
+    position: absolute; bottom: 0; left: 0; right: 0; height: 2px; pointer-events: none;
     background: linear-gradient(to right, transparent, var(--ab-brand-border) 30%, var(--ab-brand-border) 70%, transparent);
     opacity: .6;
   }
-
   .ab-hero-inner {
     position: relative; z-index: 1;
     max-width: var(--ab-max); margin: 0 auto;
     display: flex; align-items: center;
     gap: clamp(32px, 6vw, 72px);
   }
-  @media (max-width: 768px) {
-    .ab-hero-inner { flex-direction: column; text-align: center; }
-  }
+  @media (max-width: 768px) { .ab-hero-inner { flex-direction: column; text-align: center; } }
 
-  /* Left text column */
   .ab-hero-text { flex: 1; min-width: 0; }
-
   .ab-hero-desc {
     font-size: clamp(14px, 1.6vw, 16.5px); line-height: 1.72;
-    color: var(--ab-ink-3); margin: 14px 0 26px;
-    max-width: 520px;
+    color: var(--ab-ink-3); margin: 14px 0 26px; max-width: 520px;
   }
   @media (max-width: 768px) { .ab-hero-desc { margin-left: auto; margin-right: auto; } }
-
   .ab-hero-btns { display: flex; flex-wrap: wrap; gap: 10px; }
   @media (max-width: 768px) { .ab-hero-btns { justify-content: center; } }
 
-  /* Right breadcrumb / stat block */
   .ab-hero-aside {
-    flex-shrink: 0;
-    display: flex; flex-direction: column; gap: 14px;
-    width: clamp(200px, 22vw, 260px);
+    flex-shrink: 0; display: flex; flex-direction: column; gap: 12px;
+    width: clamp(200px, 22vw, 256px);
   }
   @media (max-width: 768px) {
     .ab-hero-aside { flex-direction: row; flex-wrap: wrap; width: 100%; justify-content: center; }
   }
-
   .ab-hero-stat {
     display: flex; align-items: center; gap: 12px;
-    background: var(--ab-bg-1);
-    border: 1.5px solid var(--ab-line);
-    border-radius: var(--ab-r-md);
-    padding: 12px 16px;
+    background: var(--ab-bg-1); border: 1.5px solid var(--ab-line);
+    border-radius: var(--ab-r-md); padding: 12px 16px;
     box-shadow: var(--ab-sh-sm);
     transition: box-shadow .2s, transform .2s;
   }
   .ab-hero-stat:hover { box-shadow: var(--ab-sh-md); transform: translateY(-2px); }
-
   .ab-hero-stat-icon {
     display: inline-flex; align-items: center; justify-content: center;
-    width: 36px; height: 36px; border-radius: var(--ab-r-sm);
-    flex-shrink: 0;
+    width: 36px; height: 36px; border-radius: var(--ab-r-sm); flex-shrink: 0;
   }
-  .ab-hero-stat-body {}
   .ab-hero-stat-val {
-    font-family: var(--ab-display);
-    font-size: 20px; font-weight: 900; line-height: 1;
+    font-family: var(--ab-display); font-size: 20px; font-weight: 900; line-height: 1;
     color: var(--ab-ink-1); margin-bottom: 2px;
   }
   .ab-hero-stat-lbl { font-size: 11px; font-weight: 600; color: var(--ab-ink-4); text-transform: uppercase; letter-spacing: .05em; }
@@ -273,11 +241,9 @@ const STYLES = `
   .ab-stats-wrap { background: var(--ab-bg-1); border-bottom: 1px solid var(--ab-line); }
   .ab-stats-grid { display: grid; grid-template-columns: repeat(4,1fr); }
   @media (max-width: 640px) { .ab-stats-grid { grid-template-columns: repeat(2,1fr); } }
-
   .ab-stat-cell {
     padding: 28px 20px; text-align: center;
-    border-right: 1px solid var(--ab-line);
-    transition: background .2s; cursor: default;
+    border-right: 1px solid var(--ab-line); transition: background .2s; cursor: default;
   }
   .ab-stat-cell:last-child { border-right: none; }
   .ab-stat-cell:hover { background: var(--ab-bg-2); }
@@ -288,8 +254,7 @@ const STYLES = `
   }
   .ab-stat-icon {
     display: inline-flex; align-items: center; justify-content: center;
-    width: 40px; height: 40px; border-radius: var(--ab-r-sm);
-    margin: 0 auto 12px; transition: transform .2s;
+    width: 40px; height: 40px; border-radius: var(--ab-r-sm); margin: 0 auto 12px; transition: transform .2s;
   }
   .ab-stat-cell:hover .ab-stat-icon { transform: scale(1.1) rotate(-4deg); }
   .ab-icon--indigo  { background: #eef2ff; color: #4f46e5; }
@@ -305,12 +270,10 @@ const STYLES = `
   .ab-mission-wrap { background: var(--ab-bg-1); }
   .ab-mission-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(36px,7vw,84px); align-items: center; }
   @media (max-width: 860px) { .ab-mission-grid { grid-template-columns: 1fr; } }
-
   .ab-mission-p { font-size: 15.5px; line-height: 1.8; color: var(--ab-ink-3); margin-bottom: 14px; }
   .ab-bullets { list-style: none; margin: 22px 0 30px; display: flex; flex-direction: column; gap: 11px; }
   .ab-bullet { display: flex; align-items: flex-start; gap: 10px; font-size: 14.5px; font-weight: 500; color: var(--ab-ink-2); }
   .ab-bullet svg { color: var(--ab-brand); flex-shrink: 0; margin-top: 2px; }
-
   .ab-mosaic { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
   .ab-mosaic img { width: 100%; border-radius: var(--ab-r-lg); object-fit: cover; display: block; box-shadow: var(--ab-sh-md); transition: transform .35s ease, box-shadow .35s ease; }
   .ab-mosaic img:hover { transform: scale(1.03) translateY(-4px); box-shadow: var(--ab-sh-lg); }
@@ -326,16 +289,14 @@ const STYLES = `
   .ab-val-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 18px; }
   @media (max-width: 900px) { .ab-val-grid { grid-template-columns: repeat(2,1fr); } }
   @media (max-width: 480px) { .ab-val-grid { grid-template-columns: 1fr; } }
-
   .ab-val-card {
     background: var(--ab-bg-1); border: 1.5px solid var(--ab-line); border-radius: var(--ab-r-lg);
     padding: 26px 22px 28px; position: relative; overflow: hidden;
     transition: box-shadow .25s, transform .25s, border-color .25s;
   }
-  .ab-val-card::after { content:''; position: absolute; top:0; left:0; right:0; height:3px; opacity:0; transition: opacity .25s; border-radius: 3px 3px 0 0; }
+  .ab-val-card::after { content:''; position:absolute; top:0; left:0; right:0; height:3px; opacity:0; transition:opacity .25s; border-radius:3px 3px 0 0; }
   .ab-val-card:hover { box-shadow: var(--ab-sh-lg); transform: translateY(-5px); border-color: var(--ab-line-2); }
   .ab-val-card:hover::after { opacity: 1; }
-
   .ab-val--rose   .ab-val-icon-wrap { background: #fff1f2; color: #e11d48; }
   .ab-val--rose::after              { background: #e11d48; }
   .ab-val--amber  .ab-val-icon-wrap { background: #fffbeb; color: #d97706; }
@@ -344,7 +305,6 @@ const STYLES = `
   .ab-val--violet::after            { background: #7c3aed; }
   .ab-val--sky    .ab-val-icon-wrap { background: #f0f9ff; color: #0284c7; }
   .ab-val--sky::after               { background: #0284c7; }
-
   .ab-val-icon-wrap { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: var(--ab-r-sm); margin-bottom: 16px; transition: transform .22s; }
   .ab-val-card:hover .ab-val-icon-wrap { transform: scale(1.12) rotate(-5deg); }
   .ab-val-title { font-size: 15px; font-weight: 700; color: var(--ab-ink-1); margin-bottom: 8px; letter-spacing: -.01em; }
@@ -357,7 +317,6 @@ const STYLES = `
   .ab-team-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 20px; margin-bottom: 44px; }
   @media (max-width: 860px) { .ab-team-grid { grid-template-columns: repeat(2,1fr); } }
   @media (max-width: 420px) { .ab-team-grid { gap: 12px; } }
-
   .ab-tutor-card { background: var(--ab-bg-1); border: 1.5px solid var(--ab-line); border-radius: var(--ab-r-lg); padding: 24px 18px 20px; text-align: center; transition: box-shadow .25s, transform .25s; cursor: default; }
   .ab-tutor-card:hover { box-shadow: var(--ab-sh-lg); transform: translateY(-5px); }
   .ab-avatar-wrap { position: relative; display: inline-block; margin-bottom: 14px; }
@@ -378,7 +337,6 @@ const STYLES = `
   .ab-testi-wrap { background: var(--ab-bg-3); border-top: 1px solid var(--ab-line); border-bottom: 1px solid var(--ab-line); }
   .ab-testi-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
   @media (max-width: 820px) { .ab-testi-grid { grid-template-columns: 1fr; max-width: 520px; margin: 0 auto; } }
-
   .ab-testi-card { background: var(--ab-bg-1); border: 1.5px solid var(--ab-line); border-radius: var(--ab-r-lg); padding: 26px 24px; display: flex; flex-direction: column; transition: box-shadow .25s, transform .25s; }
   .ab-testi-card:hover { box-shadow: var(--ab-sh-md); transform: translateY(-3px); }
   .ab-testi-stars { display: flex; gap: 3px; color: #f59e0b; margin-bottom: 12px; }
@@ -394,70 +352,59 @@ const STYLES = `
   ══════════════════════════════════════ */
   .ab-cta-wrap {
     position: relative; overflow: hidden;
-    border-top: 1px solid var(--ab-line);
-    color: #fff;
-    /* min-height keeps the section substantial even without a video */
-    min-height: 540px;
-    display: flex; align-items: center;
+    border-top: 1px solid var(--ab-line); color: #fff;
+    min-height: 580px; display: flex; align-items: center;
   }
 
-  /* ── Video element
-        autoPlay + muted + playsInline = cross-browser silent autoplay.
-        The poster shows while the video loads (or if the src is missing).
-        WebM is served first (smaller, better quality); MP4 is the Safari fallback.
-        Drop your files in /public/videos/ and update the <source> src values below.
-  ── */
+  /* Video fills the section completely */
   .ab-cta-video {
     position: absolute; inset: 0;
     width: 100%; height: 100%;
-    object-fit: cover;
+    object-fit: cover; object-position: center;
     z-index: 0;
   }
 
-  /* ── Layered dark overlay — keeps text readable over any video ── */
+  /* Dark gradient overlay — keeps text readable over ANY video */
   .ab-cta-overlay {
     position: absolute; inset: 0; z-index: 1;
     background: linear-gradient(
       135deg,
-      rgba(12,10,9,.88) 0%,
-      rgba(30,12,0,.76) 48%,
-      rgba(12,10,9,.84) 100%
+      rgba(10,8,7,.92) 0%,
+      rgba(28,10,0,.80) 50%,
+      rgba(10,8,7,.88) 100%
     );
   }
-  /* Brand colour radial wash on top of the dark overlay */
+  /* Brand colour wash on top */
   .ab-cta-overlay::after {
     content: ''; position: absolute; inset: 0;
-    background: radial-gradient(ellipse 80% 70% at 60% 52%, rgba(249,115,22,.20) 0%, transparent 62%);
+    background: radial-gradient(ellipse 80% 72% at 60% 52%, rgba(249,115,22,.22) 0%, transparent 64%);
   }
 
-  /* ── Decorative glow orbs (z-index above overlay, below content) ── */
+  /* Decorative glow orbs */
   .ab-cta-orb { position: absolute; z-index: 2; border-radius: 50%; pointer-events: none; }
   .ab-cta-orb-1 {
     width: 520px; height: 520px; top: -160px; left: -140px;
-    background: radial-gradient(circle, rgba(249,115,22,.15) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(249,115,22,.16) 0%, transparent 70%);
   }
   .ab-cta-orb-2 {
     width: 400px; height: 400px; bottom: -120px; right: -100px;
-    background: radial-gradient(circle, rgba(251,191,36,.12) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(251,191,36,.13) 0%, transparent 70%);
   }
 
-  /* ── Content (sits above everything) ── */
+  /* Content */
   .ab-cta-inner {
-    position: relative; z-index: 3;
-    width: 100%;
+    position: relative; z-index: 3; width: 100%;
     padding: clamp(72px, 10vw, 120px) var(--ab-px);
     text-align: center;
     max-width: var(--ab-max); margin: 0 auto;
   }
 
-  /* Animated live badge */
+  /* Live pulse badge */
   .ab-cta-badge {
     display: inline-flex; align-items: center; gap: 8px;
-    background: rgba(255,255,255,.12);
-    color: rgba(255,255,255,.92);
-    border: 1px solid rgba(255,255,255,.22);
-    border-radius: 100px; padding: 6px 16px;
-    font-size: 11px; font-weight: 700;
+    background: rgba(255,255,255,.12); color: rgba(255,255,255,.92);
+    border: 1px solid rgba(255,255,255,.22); border-radius: 100px;
+    padding: 6px 16px; font-size: 11px; font-weight: 700;
     letter-spacing: .07em; text-transform: uppercase;
     margin-bottom: 22px; backdrop-filter: blur(10px);
   }
@@ -470,7 +417,6 @@ const STYLES = `
     50%      { opacity: .5; transform: scale(.72); }
   }
 
-  /* CTA heading */
   .ab-cta-title {
     font-family: var(--ab-display);
     font-size: clamp(34px, 6vw, 66px);
@@ -479,21 +425,18 @@ const STYLES = `
   }
   .ab-cta-title em { font-style: italic; color: #fb923c; }
 
-  /* CTA body copy */
   .ab-cta-desc {
     font-size: clamp(15px, 1.8vw, 18px); line-height: 1.72;
-    color: rgba(255,255,255,.62);
-    max-width: 480px; margin: 0 auto 38px;
+    color: rgba(255,255,255,.62); max-width: 480px; margin: 0 auto 38px;
   }
 
-  /* CTA button row */
   .ab-cta-btns {
     display: flex; flex-wrap: wrap;
     align-items: center; justify-content: center;
     gap: 12px; margin-bottom: 48px;
   }
 
-  /* Trust row */
+  /* 4-item trust row */
   .ab-cta-trust {
     display: flex; flex-wrap: wrap;
     align-items: center; justify-content: center;
@@ -508,24 +451,13 @@ const STYLES = `
   .ab-cta-trust-item svg { flex-shrink: 0; }
   .ab-cta-trust-sep { width: 1px; height: 14px; background: rgba(255,255,255,.2); }
 
-  /* Dev hint — shows where to drop the video file */
-  .ab-cta-hint {
-    display: inline-flex; align-items: center; gap: 7px;
-    margin-top: 24px; font-size: 11px;
-    color: rgba(255,255,255,.25); font-weight: 500;
-  }
-
-  /* ══════════════════════════════════════
-     RESPONSIVE
-  ══════════════════════════════════════ */
   @media (max-width: 500px) {
     .ab-cta-trust-sep  { display: none; }
     .ab-cta-trust      { gap: 10px 14px; }
   }
   @media (max-width: 480px) {
     .ab-hero-btns, .ab-cta-btns { flex-direction: column; align-items: stretch; }
-    .ab-btn, .ab-btn-ghost,
-    .ab-btn-white, .ab-btn-outline-white { justify-content: center; }
+    .ab-btn, .ab-btn-ghost, .ab-btn-white, .ab-btn-outline-white { justify-content: center; }
   }
 `;
 
@@ -535,7 +467,6 @@ const STYLES = `
 export default function AboutPage() {
   return (
     <>
-      {/* Fonts loaded via <Head> — scoped to this page only */}
       <Head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
@@ -544,31 +475,19 @@ export default function AboutPage() {
           rel="stylesheet"
         />
       </Head>
-
-      {/* All CSS under .ab-root — zero bleed to other pages */}
       <style>{STYLES}</style>
 
       <div className="ab-root">
         <Navbar />
 
-        {/* ══════════════════════════════════════
-            HERO — compact / standard size
-            Two-column: headline + description
-            on the left, 4 key stat cards on the right.
-        ══════════════════════════════════════ */}
+        {/* ══════════ HERO — compact two-column ══════════ */}
         <section className="ab-hero">
           <div className="ab-hero-wash" />
           <div className="ab-hero-accent" />
-
           <div className="ab-hero-inner">
-            {/* Left column */}
             <div className="ab-hero-text">
-              <div className="ab-pill">
-                <GraduationCap size={11} /> About SkillBridge
-              </div>
-              <h1 className="ab-h1">
-                Learning,&nbsp;<em>Reimagined.</em>
-              </h1>
+              <div className="ab-pill"><GraduationCap size={11} /> About SkillBridge</div>
+              <h1 className="ab-h1">Learning,&nbsp;<em>Reimagined.</em></h1>
               <p className="ab-hero-desc">
                 SkillBridge connects passionate learners with world-class tutors.
                 Accessible, personal, and flexible education — for everyone, everywhere.
@@ -578,13 +497,11 @@ export default function AboutPage() {
                 <Link href="/register" className="ab-btn-ghost">Become a Tutor</Link>
               </div>
             </div>
-
-            {/* Right column — mini stat cards */}
             <div className="ab-hero-aside">
               {STATS.map(({ label, value, icon: Icon, cls }) => (
                 <div key={label} className="ab-hero-stat">
                   <div className={`ab-hero-stat-icon ${cls}`}><Icon size={16} /></div>
-                  <div className="ab-hero-stat-body">
+                  <div>
                     <div className="ab-hero-stat-val">{value}</div>
                     <div className="ab-hero-stat-lbl">{label}</div>
                   </div>
@@ -729,51 +646,42 @@ export default function AboutPage() {
         </section>
 
         {/* ══════════════════════════════════════
-            CTA — VIDEO BACKGROUND
-            ──────────────────────────────────────
-            HOW TO ADD YOUR VIDEO:
-            1. Export your video as both .webm and .mp4
-               (HandBrake, Adobe Media Encoder, or ffmpeg work great)
-            2. Drop both files into  /public/videos/
-                 /public/videos/cta-bg.webm
-                 /public/videos/cta-bg.mp4
-            3. Next.js serves /public/** as static assets automatically —
-               no import needed.
-            4. The <source> tags below are already pointing to those paths.
-               Just drop the files in and you're done.
-
-            FREE STOCK VIDEO (no attribution required):
-              https://www.pexels.com/videos       – search "students studying"
-              https://mixkit.co/free-stock-video/education
-              https://pixabay.com/videos
-
-            POSTER IMAGE (shown while video loads / on slow connections):
-              Currently uses an Unsplash image. Replace with your own:
-              poster="/images/cta-poster.jpg"
-            ══════════════════════════════════════ */}
+            CTA — LIVE VIDEO BACKGROUND
+            Source: Mixkit.co (CC0 — free, no attribution needed)
+            Streams directly from their CDN, no hosting required.
+        ══════════════════════════════════════ */}
         <section className="ab-cta-wrap">
 
-          {/* ── Video ── */}
+          {/*
+            VIDEO ELEMENT
+            ─────────────────────────────────────
+            autoPlay  — starts playing immediately
+            muted     — required for autoPlay to work in all browsers
+            loop      — repeats seamlessly
+            playsInline — prevents iOS Safari from going fullscreen
+
+            Two <source> tags pointing to public Mixkit CDN MP4 files.
+            The browser picks the first one it can play.
+            ─────────────────────────────────────
+          */}
           <video
             className="ab-cta-video"
             autoPlay
             loop
             muted
             playsInline
-            poster="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1600&h=720&fit=crop&q=80"
+            poster={CTA_POSTER}
           >
-            {/* WebM first — better compression, most modern browsers */}
-            <source src="/videos/cta-bg.webm" type="video/webm" />
-            {/* MP4 fallback — required for Safari */}
-            <source src="/videos/cta-bg.mp4"  type="video/mp4"  />
+            <source src={CTA_VIDEO_MP4_PRIMARY}  type="video/mp4" />
+            <source src={CTA_VIDEO_MP4_FALLBACK} type="video/mp4" />
           </video>
 
-          {/* ── Overlay layers ── */}
+          {/* Overlay + glow orbs */}
           <div className="ab-cta-overlay" />
           <div className="ab-cta-orb ab-cta-orb-1" />
           <div className="ab-cta-orb ab-cta-orb-2" />
 
-          {/* ── Content ── */}
+          {/* Content */}
           <div className="ab-cta-inner">
 
             {/* Animated live badge */}
@@ -791,7 +699,7 @@ export default function AboutPage() {
               Your first session is completely risk-free.
             </p>
 
-            {/* Buttons */}
+            {/* CTA buttons */}
             <div className="ab-cta-btns">
               <Link href="/register" className="ab-btn-white">
                 Get Started Free <ArrowRight size={15} />
@@ -804,26 +712,21 @@ export default function AboutPage() {
             {/* 4-item trust row */}
             <div className="ab-cta-trust">
               <span className="ab-cta-trust-item">
-                <Star    size={13} color="#f59e0b" fill="#f59e0b" /> 4.8 average rating
+                <Star   size={13} color="#f59e0b" fill="#f59e0b" /> 4.8 average rating
               </span>
               <span className="ab-cta-trust-sep" />
               <span className="ab-cta-trust-item">
-                <Users   size={13} color="#38bdf8" /> 50+ verified tutors
+                <Users  size={13} color="#38bdf8" /> 50+ verified tutors
               </span>
               <span className="ab-cta-trust-sep" />
               <span className="ab-cta-trust-item">
-                <Zap     size={13} color="#34d399" /> Book in under 2 min
+                <Zap    size={13} color="#34d399" /> Book in under 2 min
               </span>
               <span className="ab-cta-trust-sep" />
               <span className="ab-cta-trust-item">
-                <Shield  size={13} color="#a78bfa" /> Money-back guarantee
+                <Shield size={13} color="#a78bfa" /> Money-back guarantee
               </span>
             </div>
-
-            {/* Dev hint — remove in production */}
-            <p className="ab-cta-hint">
-              <Play size={12} /> Add your video → /public/videos/cta-bg.mp4
-            </p>
 
           </div>
         </section>
